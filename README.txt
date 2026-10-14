@@ -1,6 +1,5 @@
-Hausdienst-Protokoll v3.6
+Hausdienst-Protokoll v3.8
 
-Alle sechs Dateien in das bestehende GitHub-Repository hochladen und vorhandene Dateien ersetzen.
-Die installierte App nicht löschen. Vor Änderungen eine Datensicherung aufbewahren.
-
-Änderungen: dunkler mittiger Titel; drei helltürkise, nummerierte und mittig beschriftete Auf-/Zuklapp-Balken mit Pfeil direkt nach dem Text; keine separaten Schließen-Schaltflächen; beim Start eingeklappt.
+Alle sechs Dateien in das bestehende GitHub-Repository hochladen und ersetzen.
+Installierte App nicht löschen; lokale Daten vorher sichern.
+Änderungen: farbige Tabelle mit Linien und Zellenausrichtung, breitere Tätigkeitsspalte, Diktierhinweise, Dienstwahl ohne Uhrzeiten, Zimmer-Zahlwörter.

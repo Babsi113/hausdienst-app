@@ -185,6 +185,74 @@ header h1{font-size:clamp(1.15rem,4.5vw,1.5rem);line-height:1.35}
 #setup.collapsed,#entryCard.collapsed,#overviewCard.collapsed{padding:0!important}
 @media(max-width:650px){#setup:not(.collapsed)>#dienstHeading,#entryCard:not(.collapsed)>#entryHeading,#overviewCard:not(.collapsed)>#overviewHeading{padding:0!important}}
 @media print{#setup,#entryCard,#overviewCard{display:none!important}}
+
+/* v3.7: The same accordion bar stays visible ABOVE its panel in both states. */
+#setup,#entryCard,#overviewCard{display:flex!important;flex-direction:column!important}
+#setup>.actions:has(#toggleDienstangaben),
+#entryCard>.actions:has(#newEntry),
+#overviewCard>.overview-toggle-row{
+  order:-1!important;position:relative!important;top:auto!important;right:auto!important;
+  left:auto!important;bottom:auto!important;inset:auto!important;
+  display:block!important;width:100%!important;margin:0 0 12px!important;
+  padding:0!important;z-index:1!important;flex:none!important;
+}
+#setup.collapsed>.actions:has(#toggleDienstangaben),
+#entryCard.collapsed>.actions:has(#newEntry),
+#overviewCard.collapsed>.overview-toggle-row{margin-bottom:0!important}
+#setup #toggleDienstangaben,#entryCard #newEntry,#overviewCard #toggleOverview{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  gap:clamp(11px,3vw,15px)!important;min-height:58px!important;
+  width:100%!important;max-width:none!important;margin:0!important;
+  padding:12px 6px!important;background:#20a9ad!important;color:#fff!important;
+  border:0!important;border-radius:10px!important;box-shadow:none!important;
+  font-size:clamp(11px,3.25vw,15px)!important;font-weight:700!important;
+  text-align:center!important;white-space:nowrap!important;line-height:1.25!important;
+}
+#setup #toggleDienstangaben::before,#entryCard #newEntry::before,#overviewCard #toggleOverview::before{
+  flex:0 0 27px!important;width:27px!important;height:27px!important;
+}
+#setup #toggleDienstangaben::after,#entryCard #newEntry::after,#overviewCard #toggleOverview::after{
+  flex:0 0 9px!important;position:static!important;inset:auto!important;
+  width:9px!important;height:9px!important;
+  transform:translateY(-2px) rotate(45deg)!important;
+}
+#setup:not(.collapsed) #toggleDienstangaben::after,
+#entryCard:not(.collapsed) #newEntry::after,
+#overviewCard:not(.collapsed) #toggleOverview::after{
+  transform:translateY(3px) rotate(225deg)!important;
+}
+header{background:#08666c!important;text-align:center!important;padding:22px 6px!important}
+header h1{font-size:clamp(14px,4.35vw,24px)!important;line-height:1.3!important;white-space:nowrap!important;letter-spacing:-.025em!important}
+
+
+/* v3.8: softly tinted, fully ruled responsive task table */
+#overviewCard .tablewrap{width:100%;max-width:100%;overflow-x:auto!important;border:1px solid #b8dedb;border-radius:11px;background:#fff;-webkit-overflow-scrolling:touch}
+#overviewCard .tablewrap table{border-collapse:collapse!important;table-layout:fixed!important;width:100%!important;min-width:0!important;border:0!important}
+#overviewCard .tablewrap th,#overviewCard .tablewrap td{box-sizing:border-box!important;border:1px solid #c9e5e2!important;vertical-align:middle!important;overflow-wrap:normal!important;word-break:normal!important}
+#overviewCard .tablewrap th{background:#e1f4f2!important;color:#164f52!important;font-weight:750!important;text-align:center!important;white-space:nowrap!important;padding:11px 1px!important}
+#overviewCard .tablewrap td{background:#fff!important;padding:9px 2px!important;text-align:center!important}
+#overviewCard .tablewrap tbody tr:nth-child(even) td{background:#f3fbfa!important}
+#overviewCard .tablewrap tbody tr.active-row td{background:#fff9e9!important}
+#overviewCard .tablewrap th:nth-child(1),#overviewCard .tablewrap td:nth-child(1){width:15%!important}
+#overviewCard .tablewrap th:nth-child(2),#overviewCard .tablewrap td:nth-child(2){width:15%!important}
+#overviewCard .tablewrap th:nth-child(3),#overviewCard .tablewrap td:nth-child(3){width:15%!important}
+#overviewCard .tablewrap th:nth-child(4),#overviewCard .tablewrap td:nth-child(4){width:15%!important}
+#overviewCard .tablewrap th:nth-child(5),#overviewCard .tablewrap td:nth-child(5){width:30%!important;text-align:left!important}
+#overviewCard .tablewrap th:nth-child(6),#overviewCard .tablewrap td:nth-child(6){width:10%!important;text-align:center!important}
+#overviewCard .tablewrap .cell-edit{box-sizing:border-box!important;display:block!important;width:100%!important;min-width:0!important;margin:0!important;border:0!important;background:transparent!important;text-align:center!important;padding:4px 0!important;border-radius:4px!important;font:inherit!important;font-size:clamp(10px,2.7vw,14px)!important;line-height:1.4!important;color:#153b3c!important}
+#overviewCard .tablewrap .time-edit{font-size:clamp(10px,2.55vw,13px)!important;letter-spacing:-.2px!important}
+#overviewCard .tablewrap .task-edit{font-size:clamp(11px,2.8vw,14px)!important;text-align:left!important;resize:vertical!important;min-height:44px!important;height:auto;white-space:pre-wrap!important;overflow-wrap:anywhere!important;word-break:break-word!important;padding:7px 3px!important;line-height:1.45!important}
+#overviewCard .tablewrap .row-actions{padding:6px 1px!important}
+#overviewCard .tablewrap .row-actions button{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:23px!important;height:24px!important;padding:0!important;margin:2px auto!important;vertical-align:middle!important}
+#overviewCard .tablewrap .row-actions .delete-icon{background:#fff0f0!important;color:#b43131!important;border:1px solid #ecc4c4!important}
+#overviewCard .tablewrap th:nth-child(6){font-size:clamp(8px,2.25vw,12px)!important;letter-spacing:-.2px!important}
+@media(min-width:650px){#overviewCard .tablewrap th,#overviewCard .tablewrap td{padding:12px 7px!important}}
+.dictation-panel .dictation-heading{display:flex!important;align-items:center!important;gap:7px!important;width:fit-content!important;padding:2px 0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#087f82!important;font-size:.96rem!important;font-weight:750!important}
+.dictation-mic{width:15px;height:15px;flex:none}
+.dictation-note{margin:0!important;font-size:.79rem!important;color:#658284!important}
+#taetigkeit::placeholder{font-size:clamp(11px,3vw,14px);color:#809699;opacity:1}
+@media(max-width:380px){#overviewCard .tablewrap th{font-size:clamp(8px,2.2vw,10px)!important}#overviewCard .tablewrap td{padding-left:1px!important;padding-right:1px!important}}
+
 </style></head>
 <body>
 <header><h1>Mein persönliches Hausdienst-Protokoll</h1></header>
@@ -194,7 +262,7 @@ header h1{font-size:clamp(1.15rem,4.5vw,1.5rem);line-height:1.35}
 <div class="current-duty"><div class="small">AKTUELL GEÖFFNETER DIENST</div><div id="dienststatus" class="status">Noch kein Dienst geöffnet.</div></div>
 <div class="duty-panel"><div class="topline"><h3>Neuen Dienst anlegen / bearbeiten</h3></div>
 <div id="setupContent"><div class="grid">
-<div class="field"><label for="diensttyp">Diensttyp</label><div class="choice-combo"><input id="diensttyp" list="diensttypList" placeholder="Diensttyp auswählen oder eintippen" autocomplete="off"><button class="choice-arrow" type="button" data-for="diensttyp" aria-label="Diensttypen anzeigen" title="Diensttypen anzeigen">▾</button></div><datalist id="diensttypList"><option>1. Dienst</option><option>2. Dienst</option><option>3. Dienst</option><option>E2 Dienst</option><option>KBC Dienst</option></datalist></div>
+<div class="field"><label for="diensttyp">Dienst</label><div class="choice-combo"><input id="diensttyp" list="diensttypList" placeholder="Dienst auswählen oder eintippen" autocomplete="off"><button class="choice-arrow" type="button" data-for="diensttyp" aria-label="Diensttypen anzeigen" title="Diensttypen anzeigen">▾</button></div><datalist id="diensttypList"><option>1. Dienst</option><option>2. Dienst</option><option>3. Dienst</option><option>E2 Dienst</option><option>KBC Dienst</option></datalist></div>
 <div class="field"><label for="diensttitel">Optionale Bezeichnung</label><input id="diensttitel" placeholder="z. B. Spätdienst"></div>
 <div class="field"><label for="wochentag">Wochentag (automatisch)</label><input id="wochentag" readonly></div>
 <div class="field"><label for="datum">Datum</label><div class="date-combo"><input id="datum" type="text" inputmode="text" placeholder="TT.MM.JJJJ" maxlength="10" pattern="[0-9]{2}\.[0-9]{2}\.[0-9]{4}"><button id="datumPicker" class="calendar-trigger" type="button" aria-label="Kalender öffnen" title="Kalender öffnen">▦</button></div></div>
@@ -213,9 +281,9 @@ header h1{font-size:clamp(1.15rem,4.5vw,1.5rem);line-height:1.35}
 <div class="field"><label for="zimmer">Zimmer</label><input id="zimmer" placeholder="Zimmer eintippen"></div>
 <div class="field"><label for="startzeit">Beginn der Tätigkeit</label><div class="time-combo"><input id="startzeit" type="text" inputmode="numeric" maxlength="5" placeholder="HH:MM"><button type="button" class="time-picker-trigger" data-time="startzeit" aria-label="Uhrzeit für startzeit auswählen" title="Uhrzeit auswählen">◷</button></div></div>
 <div class="field"><label for="endzeit">Ende der Tätigkeit (optional)</label><div class="time-combo"><input id="endzeit" type="text" inputmode="numeric" maxlength="5" placeholder="HH:MM"><button type="button" class="time-picker-trigger" data-time="endzeit" aria-label="Uhrzeit für endzeit auswählen" title="Uhrzeit auswählen">◷</button></div></div>
-<div class="field" style="grid-column:1/-1"><label for="taetigkeit">Tätigkeit</label><textarea id="taetigkeit" rows="4" placeholder="Tätigkeit eintippen oder diktieren"></textarea><datalist id="taskList"></datalist><p class="small">Zum Diktieren das Mikrofon auf der iPhone- oder Android-Tastatur verwenden.</p></div>
+<div class="field" style="grid-column:1/-1"><label for="taetigkeit">Tätigkeit</label><textarea id="taetigkeit" rows="4" placeholder="Tätigkeit eintippen oder diktieren (Mikrofon der Tastatur verwenden)"></textarea><datalist id="taskList"></datalist></div>
 </div>
-<div class="field dictation-panel"><label for="allDictation" class="dictation-heading">ODER: Alles diktieren!</label><textarea id="allDictation" rows="4" placeholder="z. B. Station D4, Zimmer 5, Blutentnahme"></textarea><button id="applyDictation" type="button" class="secondary">Angaben übernehmen</button><p class="small">Zum Diktieren das Mikrofon auf der iPhone- oder Android-Tastatur verwenden.</p></div>
+<div class="field dictation-panel"><label for="allDictation" class="dictation-heading">ODER: Alles diktieren <svg class="dictation-mic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5m-4 0h8"/></svg></label><textarea id="allDictation" rows="4" placeholder="z. B. Station D4, Zimmer 5, Blutentnahme"></textarea><button id="applyDictation" type="button" class="secondary">Angaben übernehmen</button><p class="small dictation-note">Mit „Angaben übernehmen“ werden die Felder oben ausgefüllt.</p></div>
 <div class="small" style="margin-top:12px">Kurze, häufig genutzte Tätigkeiten (eigene Vorschläge erst ab 3 Verwendungen innerhalb von 90 Tagen):</div><div id="taskChips" class="taskchips" style="margin-top:8px"></div><div class="actions no-print"><button id="moreTaskSuggestions" type="button" class="secondary hidden">Weitere Vorschläge anzeigen</button></div>
 <div class="actions no-print"><button id="saveTask">Tätigkeit speichern / starten</button><button id="clearEntry" class="danger">× Felder leeren</button></div>
 <p class="footer-note">Beim Live-Erfassen lässt du das Endzeitfeld leer und drückst später in der Tabelle auf „Tätigkeit beenden“. Beim Nachtragen kannst du Beginn und Ende vor dem Speichern eintragen. Spracheingabe hängt von Browser und Gerät ab; sie kann eine Internetverbindung oder externe Spracherkennung nutzen.</p>
@@ -237,8 +305,8 @@ function load(){try{const s=localStorage.getItem('hausdienst-protokoll-v2')||loc
 function persist(){try{localStorage.setItem('hausdienst-protokoll-v2',JSON.stringify(state));$('savedBadge').textContent='Lokal gespeichert · '+timeNow()}catch(e){$('savedBadge').textContent='Speichern nicht möglich';notify('Lokales Speichern ist nicht verfügbar.')}}
 function updateWeekday(){if(!$('datum').value){$('wochentag').value='';return}const iso=parseDateISO($('datum').value);if(!iso){$('wochentag').value='';return}const d=new Date(iso+'T12:00:00');$('wochentag').value=['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'][d.getDay()]}
 function getDienst(){return {typ:$('diensttyp').value,datum:parseDateISO($('datum').value),wochentag:$('wochentag').value,planStart:$('planStart').value,planEnd:$('planEnd').value,actualEnd:$('actualEnd').value,titel:$('diensttitel').value.trim()}}
-function render(){renderTasks();renderRows();$('dienstDetails').classList.toggle('hidden',!window.dienstDetailsOpen);$('setup').classList.toggle('collapsed',!window.dienstDetailsOpen);$('toggleDienstangaben').classList.remove('hidden');$('overviewCard').classList.remove('hidden');$('overviewDetails').classList.toggle('hidden',!window.overviewOpen);$('overviewCard').classList.toggle('collapsed',!window.overviewOpen);$('overviewHeading').classList.toggle('hidden',!window.overviewOpen);$('toggleOverview').textContent='Übersicht aller Tätigkeiten';$('entryCard').classList.remove('hidden');$('entryDetails').classList.toggle('hidden',!!window.entryFormHidden);$('entryCard').classList.toggle('collapsed',!!window.entryFormHidden);$('entryHeading').classList.toggle('hidden',!!window.entryFormHidden);$('newEntry').textContent='Neue Tätigkeit erfassen';$('toggleDienstangaben').textContent='Dienstangaben';$('setupContent').classList.toggle('hidden',!!state.dienst&&!pendingNewDuty);$('createDienst').classList.toggle('hidden',!!state.dienst&&!pendingNewDuty);$('createDienst').textContent=pendingNewDuty||!state.dienst?'Neuen Dienst anlegen':'Dienstangaben speichern';$('editDienst').classList.toggle('hidden',!state.dienst||pendingNewDuty);$('newDienst').classList.toggle('hidden',!state.dienst||pendingNewDuty);renderArchives();$('dienststatus').innerHTML=state.dienst?'<b>'+esc(state.dienst.typ)+'</b> · '+esc(state.dienst.wochentag||'')+', '+esc(formatDateDE(state.dienst.datum||'')) :'Noch kein Dienst angelegt. Lege einen Dienst an, um Tätigkeiten zu erfassen.';}
-function renderArchives(){const sel=$('savedDienste');if(!sel)return;const current=sel.value;sel.innerHTML='<option value="">Bitte gespeicherten Dienst wählen</option>'+state.archives.map((a,i)=>'<option value="'+i+'">'+esc(a.dienst.typ+' · '+a.dienst.wochentag+' '+formatDateDE(a.dienst.datum)+' · '+a.dienst.planStart+'–'+a.dienst.planEnd)+'</option>').join('');if(current&&Number(current)<state.archives.length)sel.value=current}
+function render(){renderTasks();renderRows();$('dienstDetails').classList.toggle('hidden',!window.dienstDetailsOpen);$('setup').classList.toggle('collapsed',!window.dienstDetailsOpen);$('toggleDienstangaben').classList.remove('hidden');$('overviewCard').classList.remove('hidden');$('overviewDetails').classList.toggle('hidden',!window.overviewOpen);$('overviewCard').classList.toggle('collapsed',!window.overviewOpen);$('overviewHeading').classList.toggle('hidden',!window.overviewOpen);$('toggleOverview').textContent='Übersicht aller Tätigkeiten';$('entryCard').classList.remove('hidden');$('entryDetails').classList.toggle('hidden',!!window.entryFormHidden);$('entryCard').classList.toggle('collapsed',!!window.entryFormHidden);$('entryHeading').classList.toggle('hidden',!!window.entryFormHidden);$('newEntry').textContent='Neue Tätigkeit erfassen';$('toggleDienstangaben').textContent='Dienstangaben';$('toggleDienstangaben').setAttribute('aria-expanded',String(!!window.dienstDetailsOpen));$('newEntry').setAttribute('aria-expanded',String(!window.entryFormHidden));$('toggleOverview').setAttribute('aria-expanded',String(!!window.overviewOpen));$('setupContent').classList.toggle('hidden',!!state.dienst&&!pendingNewDuty);$('createDienst').classList.toggle('hidden',!!state.dienst&&!pendingNewDuty);$('createDienst').textContent=pendingNewDuty||!state.dienst?'Neuen Dienst anlegen':'Dienstangaben speichern';$('editDienst').classList.toggle('hidden',!state.dienst||pendingNewDuty);$('newDienst').classList.toggle('hidden',!state.dienst||pendingNewDuty);renderArchives();$('dienststatus').innerHTML=state.dienst?'<b>'+esc(state.dienst.typ)+'</b> · '+esc(state.dienst.wochentag||'')+', '+esc(formatDateDE(state.dienst.datum||'')) :'Noch kein Dienst angelegt. Lege einen Dienst an, um Tätigkeiten zu erfassen.';}
+function renderArchives(){const sel=$('savedDienste');if(!sel)return;const current=sel.value;sel.innerHTML='<option value="">Bitte gespeicherten Dienst wählen</option>'+state.archives.map((a,i)=>'<option value="'+i+'">'+esc(a.dienst.typ+' · '+a.dienst.wochentag+', '+formatDateDE(a.dienst.datum))+'</option>').join('');if(current&&Number(current)<state.archives.length)sel.value=current}
 let showMoreTaskSuggestions=false;
 function renderTasks(){
  const stations=[...new Set([...defaultStations,...state.customStations])].sort((a,b)=>a.localeCompare(b,'de'));
@@ -270,7 +338,7 @@ function renderRows(){
  if(!rows.length){$('rows').innerHTML='<tr><td colspan="6" class="small">Noch keine Tätigkeiten erfasst.</td></tr>';return}
  $('rows').innerHTML=rows.map(e=>{
    const active=!e.end;
-   const field=(key,value,type='text',extra='')=>'<input class="cell-edit '+extra+'" data-inline-id="'+esc(e.id)+'" data-field="'+key+'" type="'+type+'" aria-label="'+({start:'Beginn',end:'Ende',station:'Station',room:'Zimmer',task:'Tätigkeit'}[key]||key)+'" value="'+esc(value||'')+'" placeholder="—">';
+   const field=(key,value,type='text',extra='')=>key==='task' ? '<textarea rows="1" class="cell-edit '+extra+'" data-inline-id="'+esc(e.id)+'" data-field="task" aria-label="Tätigkeit" placeholder="—">'+esc(value||'')+'</textarea>' : '<input class="cell-edit '+extra+'" data-inline-id="'+esc(e.id)+'" data-field="'+key+'" type="'+type+'" aria-label="'+({start:'Beginn',end:'Ende',station:'Station',room:'Zimmer'}[key]||key)+'" value="'+esc(value||'')+'" placeholder="—">';
    return '<tr class="'+(active?'active-row':'')+'">'+
      '<td class="duration">'+field('start',e.start,'time','time-edit')+'</td>'+
      '<td class="duration">'+(active?'<span class="tag">Läuft</span>':'')+field('end',e.end,'time','time-edit')+'</td>'+
@@ -306,7 +374,7 @@ function renderRows(){
      notify('Änderung gespeichert.');
    };
    input.addEventListener('change',commit);
-   input.addEventListener('keydown',ev=>{if(ev.key==='Enter'){ev.preventDefault();input.blur();}});
+   input.addEventListener('keydown',ev=>{if(ev.key==='Enter'&&input.tagName!=='TEXTAREA'){ev.preventDefault();input.blur();}});
  });
  $('rows').querySelectorAll('[data-end]').forEach(b=>b.onclick=()=>endEntry(b.dataset.end));
  $('rows').querySelectorAll('[data-delete]').forEach(b=>b.onclick=()=>deleteEntry(b.dataset.delete));
@@ -339,8 +407,12 @@ function exportPDF(){
  window.print();
 }
 function startRecognition(target,continuous=false){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){notify('Dieser Browser bietet keine kompatible Spracheingabe. Auf dem iPhone bitte Safari über eine HTTPS-Webadresse testen; alternativ die iPhone-Tastatur-Diktierfunktion nutzen.');return null}if(location.protocol!=='https:'&&location.hostname!=='localhost'&&location.protocol!=='file:'){notify('Für Mikrofonzugriff wird normalerweise eine sichere HTTPS-Verbindung benötigt.');return null}const rec=new SR();rec.lang='de-DE';rec.interimResults=true;rec.continuous=continuous;let final='';rec.onresult=e=>{let interim='';for(let i=e.resultIndex;i<e.results.length;i++){const t=e.results[i][0].transcript;if(e.results[i].isFinal)final+=t+' ';else interim+=t}if(target==='all'){const text=(final+interim).trim();parseVoice(text,false)}else $(target).value=(final+interim).trim()};rec.onerror=e=>notify('Spracheingabe: '+(e.error==='not-allowed'?'Mikrofonzugriff nicht erlaubt.':e.error));rec.onend=()=>{if(target==='all'&&final.trim())parseVoice(final.trim(),true);if(target==='taetigkeit'&&final.trim())$('taetigkeit').value=final.trim().replace(/[.\s]+$/,'')};try{rec.start();listening=rec;return rec}catch(e){notify('Mikrofon konnte nicht gestartet werden.');return null}}
+function normalizeRoomWords(text){
+ const numbers={null:'0',eins:'1',ein:'1',eine:'1',zwei:'2',drei:'3',vier:'4','fünf':'5',fuenf:'5',sechs:'6',sieben:'7',acht:'8',neun:'9',zehn:'10',elf:'11','zwölf':'12',zwoelf:'12',dreizehn:'13',vierzehn:'14','fünfzehn':'15',fuenfzehn:'15',sechzehn:'16',siebzehn:'17',achtzehn:'18',neunzehn:'19',zwanzig:'20'};
+ return String(text||'').replace(/\b(zimmer(?:nummer)?|raum)(\s*(?:nr\.?|nummer)?\s*)(null|eins|ein|eine|zwei|drei|vier|fünf|fuenf|sechs|sieben|acht|neun|zehn|elf|zwölf|zwoelf|dreizehn|vierzehn|fünfzehn|fuenfzehn|sechzehn|siebzehn|achtzehn|neunzehn|zwanzig)\b/gi,(all,label,space,word)=>label+space+(numbers[word.toLocaleLowerCase('de')]||word));
+}
 function parseVoice(text,final){
- const spoken=String(text||'').trim();if(!spoken)return;
+ const spoken=normalizeRoomWords(text).trim();if(!spoken)return;
  let task=spoken;
  // Entire labeled phrases must be removed, not just the captured room number.
  const stationPattern=/(?:\bstation\s*)?\b(I[1-4]|E2|D[456]|F(?:31|41|51)|G3[12]|MAKS)\b/i;
@@ -374,7 +446,7 @@ const calendarOverlay=document.createElement('div');calendarOverlay.className='m
 let calendarMonth=new Date();
 function drawCalendar(){const year=calendarMonth.getFullYear(),month=calendarMonth.getMonth();$('calMonth').textContent=calendarMonth.toLocaleDateString('de-DE',{month:'long',year:'numeric'});const days=$('calDays');days.replaceChildren();for(const day of ['Mo','Di','Mi','Do','Fr','Sa','So']){const el=document.createElement('span');el.textContent=day;days.appendChild(el)}const offset=(new Date(year,month,1).getDay()+6)%7;for(let i=0;i<offset;i++)days.appendChild(document.createElement('span'));const n=new Date(year,month+1,0).getDate();for(let day=1;day<=n;day++){const button=document.createElement('button');button.type='button';button.textContent=day;button.className='calendar-day';button.addEventListener('click',()=>{const iso=year+'-'+String(month+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');$('datum').value=formatDateDE(iso);$('datum').dispatchEvent(new Event('change',{bubbles:true}));calendarOverlay.hidden=true});days.appendChild(button)}}
 $('datumPicker').addEventListener('click',()=>{const iso=parseDateISO($('datum').value);calendarMonth=iso?new Date(iso+'T12:00:00'):new Date();drawCalendar();calendarOverlay.hidden=false});$('calPrev').onclick=()=>{calendarMonth.setMonth(calendarMonth.getMonth()-1);drawCalendar()};$('calNext').onclick=()=>{calendarMonth.setMonth(calendarMonth.getMonth()+1);drawCalendar()};$('calClose').onclick=()=>calendarOverlay.hidden=true;calendarOverlay.addEventListener('click',e=>{if(e.target===calendarOverlay)calendarOverlay.hidden=true});
-$('datum').addEventListener('change',updateWeekday);$('clearEntry').onclick=clearEntry;$('export').onclick=exportPDF;$('backup').onclick=backupData;$('restore').onclick=()=>$('restoreFile').click();$('restoreFile').addEventListener('change',restoreData);$('applyDictation').onclick=()=>{const v=$('allDictation').value.trim();if(!v){notify('Bitte zuerst Text eingeben oder über die Tastatur diktieren.');return}parseVoice(v,true);$('allDictation').value=''};$('backupMenu').onclick=()=>{$('backupChoices').classList.toggle('hidden')};
+$('datum').addEventListener('change',updateWeekday);$('clearEntry').onclick=clearEntry;$('export').onclick=exportPDF;$('backup').onclick=backupData;$('restore').onclick=()=>$('restoreFile').click();$('restoreFile').addEventListener('change',restoreData);$('allDictation').addEventListener('change',()=>{$('allDictation').value=normalizeRoomWords($('allDictation').value)});$('applyDictation').onclick=()=>{const v=normalizeRoomWords($('allDictation').value).trim();if(!v){notify('Bitte zuerst Text eingeben oder über die Tastatur diktieren.');return}parseVoice(v,true);$('allDictation').value=''};$('backupMenu').onclick=()=>{$('backupChoices').classList.toggle('hidden')};
 
 // Eigenständige Uhr-Auswahl: Antippen des Feldes erlaubt Texteingabe, Symbol öffnet die Auswahl.
 const timeDialog=document.createElement('div');timeDialog.className='time-dialog';timeDialog.hidden=true;
