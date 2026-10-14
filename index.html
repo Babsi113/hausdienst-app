@@ -4,21 +4,9 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Hausdienst-Protokoll</title><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#087f82"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hausdienst"><link rel="apple-touch-icon" href="./icon-192.png">
 <style>
+
 :root{--navy:#087f82;--blue:#0aa5a5;--bg:#eff9f8;--line:#c8e4e1;--ink:#153b3c;--muted:#557477;--red:#a83333}*{box-sizing:border-box}body{margin:0;background:var(--bg);font:16px system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink)}header{background:var(--navy);color:white;padding:22px max(16px,calc((100vw - 1000px)/2));}header h1{margin:0;font-size:1.5rem}header p{margin:5px 0 0;color:#e0fffb}main{max-width:1000px;margin:20px auto;padding:0 14px 40px;display:grid;gap:16px}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 2px 8px #10203008}.card h2{margin:0 0 14px;font-size:1.15rem}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:grid;gap:5px}.field label{font-size:.88rem;color:var(--muted);font-weight:650}input,select,textarea{width:100%;border:1px solid #bdcbd6;border-radius:9px;padding:11px 12px;font:inherit;background:white;color:var(--ink);min-width:0}button{border:0;border-radius:10px;padding:11px 14px;font:inherit;font-weight:650;cursor:pointer;background:var(--navy);color:white}button.secondary{background:#e9f0f5;color:var(--navy);border:1px solid #d0dce5}button.outline{background:white;color:var(--navy);border:1px solid #bdcbd6}.print-only{display:none}button.danger{background:#fff0f0;color:var(--red);border:1px solid #edcaca}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.small{font-size:.85rem;color:var(--muted)}.status{background:#e4f7f4;border-radius:10px;padding:12px;margin:12px 0}.taskchips,.chips{display:flex;gap:7px;flex-wrap:wrap}.chip{padding:8px 10px;border-radius:999px;border:1px solid #cbd7e0;background:#f7fafc;color:var(--navy);font-size:.9rem}.chip:hover{background:#e4eff6}.microw{display:flex;gap:8px}.microw input{flex:1}.mic{background:#f0e9ff;color:#4b2784;border:1px solid #d9c9f7}.mic.listening{background:#ffe5e5;color:#a31c1c;animation:pulse 1s infinite}@keyframes pulse{50%{opacity:.65}}.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:650px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:.82rem;color:var(--muted);background:#f8fafb}td{font-size:.92rem}.active-row{background:#fff9e9}.cell-edit{display:block;width:100%;min-width:68px;border:1px solid transparent;background:transparent;border-radius:6px;padding:6px 5px;font:inherit;color:inherit}.cell-edit:hover,.cell-edit:focus{border-color:#9bb8cb;background:#fff;outline:none}.cell-edit.task-edit{min-width:180px}.cell-edit.time-edit{min-width:88px}.tag{font-size:.76rem;background:#fff0c7;color:#725000;padding:3px 7px;border-radius:999px}.hidden{display:none!important}.topline{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.duration{white-space:nowrap;font-variant-numeric:tabular-nums}.footer-note{font-size:.8rem;color:var(--muted);line-height:1.45}#message{position:sticky;bottom:10px;background:#087f82;color:white;padding:10px 14px;border-radius:10px;display:none;box-shadow:0 3px 14px #0002}.endbtn{background:#8c2929}.activepill{color:#17633d;background:#e7f7ed;padding:5px 8px;border-radius:999px;font-size:.8rem}@media(max-width:600px){.grid{grid-template-columns:1fr}.card{padding:14px}header{padding:18px 16px}main{margin-top:12px}.actions button{flex:1}.topline{align-items:flex-start}}@media print{body{background:white}body>*:not(main){display:none!important}main>*:not(#printReport){display:none!important}#printReport{display:block!important;color:#111;font:11pt Arial,sans-serif}#printReport h1{font-size:16pt;margin:0 0 8px}#printReport p{margin:0 0 14px}#printReport table{width:100%;min-width:0;border-collapse:collapse}#printReport th,#printReport td{border:1px solid #aaa;padding:6px;font-size:10pt}#printReport th{background:#eee!important}header{background:white;color:#111;padding:0 0 15px}header p{color:#333}main{display:block;max-width:none;margin:0;padding:0}.card{box-shadow:none;border:0;padding:10px 0;break-inside:avoid}.no-print,button,.taskchips,.chips,.footer-note{display:none!important}table{min-width:0}th,td{padding:7px 5px;font-size:10pt}#setup .grid{grid-template-columns:repeat(3,1fr)} }
  #entryCard.collapsed{background:transparent;border:0;box-shadow:none;padding:0}#entryCard.collapsed .actions{margin:0}#setup.collapsed{background:transparent;border:0;box-shadow:none;padding:0}#setup.collapsed #dienstHeading{display:none}#setup.collapsed .actions{margin:0} .duty-panel{border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:14px;background:#fbfefd}.duty-panel h3{font-size:1rem;margin:0 0 12px}.current-duty{border-left:5px solid var(--blue);padding-left:12px;margin:14px 0}.current-duty .status{font-size:1rem;font-weight:600}@media(max-width:600px){#actualEnd{width:100%}.field:has(#actualEnd){grid-column:1!important}}.signature{display:flex;justify-content:space-between;gap:24px;margin-top:38px;padding-top:12px;border-top:1px solid #888}@media print{#printReport th{border-bottom:2px solid #333!important}#printReport td{border-bottom:1px solid #999!important}#printReport .signature{display:none}} 
-/* v1.5: Place collapse controls in the top-right corner of expanded panels. */
-#setup:not(.collapsed),#entryCard:not(.collapsed){position:relative;padding-top:20px}
-#setup:not(.collapsed)> .actions:has(#toggleDienstangaben),
-#entryCard:not(.collapsed)> .actions:has(#newEntry){position:absolute;right:18px;top:12px;margin:0;z-index:1}
-#setup:not(.collapsed)>#dienstHeading,
-#entryCard:not(.collapsed)>#entryHeading{padding-right:300px;min-height:43px}
-#setup:not(.collapsed)>#dienstHeading #savedBadge{display:none}
-@media(max-width:650px){
- #setup:not(.collapsed)>#dienstHeading,
- #entryCard:not(.collapsed)>#entryHeading{padding-right:0;padding-top:46px;min-height:0}
- #setup:not(.collapsed)> .actions:has(#toggleDienstangaben),
- #entryCard:not(.collapsed)> .actions:has(#newEntry){top:10px;right:12px}
-}
 
 .date-combo{display:flex;align-items:center;gap:7px}.date-combo #datum{flex:1;min-width:0}.date-combo #datumPicker{width:48px;min-width:48px;padding:9px 7px;cursor:pointer;color:var(--navy)}
 .choice-combo{display:flex;position:relative;align-items:stretch}.choice-combo>input{padding-right:45px}.choice-combo>.choice-arrow{position:absolute;right:2px;top:2px;bottom:2px;width:39px;padding:0;border-radius:7px;background:#e5f5f3;color:#087f82;border:1px solid #c8e4e1;font-size:23px;line-height:1}.choice-combo>.choice-arrow:hover{background:#cceae7}
@@ -53,30 +41,6 @@
 .calendar-trigger{width:48px;min-width:48px;padding:8px;font-size:27px;line-height:1;background:#e5f5f3;color:#087f82;border:1px solid #c8e4e1}
 .mobile-overlay[hidden]{display:none}.mobile-overlay{position:fixed;inset:0;z-index:10000;background:#0007;display:flex;align-items:center;justify-content:center;padding:14px}.mobile-dialog{width:min(380px,100%);max-height:90vh;overflow:auto;background:white;padding:18px;border-radius:15px;box-shadow:0 12px 30px #0003}.calendar-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.calendar-head button{font-size:26px;padding:6px 16px}.calendar-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;text-align:center;margin-bottom:16px}.calendar-days>span{padding:10px 0;font-size:13px}.calendar-day{min-width:0;padding:10px 0;border-radius:7px;background:#e5f5f3;color:#075f61;font-size:15px}.calendar-day:active{background:#087f82;color:white}
 
-/* v3.1: compact five-column iPhone table, regardless of collapsed panels. */
-html,body{width:100%;max-width:100%;overflow-x:hidden}
-main,.card,#overviewCard,.tablewrap{min-width:0;max-width:100%}
-@media(max-width:650px){
- #overviewCard{padding:8px}
- #overviewCard .tablewrap{width:100%;overflow-x:hidden}
- #overviewCard table{table-layout:fixed;width:100%;min-width:0!important}
- #overviewCard th,#overviewCard td{padding:5px 2px;font-size:10px;min-width:0;overflow:hidden}
- #overviewCard th:nth-child(1),#overviewCard th:nth-child(2){width:20%}
- #overviewCard th:nth-child(3){width:14%}
- #overviewCard th:nth-child(4){width:13%}
- #overviewCard th:nth-child(5){width:33%}
- #overviewCard th:nth-child(6),#overviewCard td:nth-child(6){display:none}
- #overviewCard .cell-edit{display:block;box-sizing:border-box;width:100%;max-width:100%;min-width:0!important;padding:3px 0;font-size:11px;line-height:1.3;border-radius:2px}
- #overviewCard .cell-edit[type=time]{font-size:10px;letter-spacing:-.5px;-webkit-appearance:none;appearance:none}
- #overviewCard .cell-edit[type=time]::-webkit-calendar-picker-indicator{display:none}
- #overviewCard .cell-edit[type=time]::-webkit-datetime-edit{padding:0}
- #overviewCard .duration{white-space:normal}
- #overviewCard tr.mobile-actions td{display:table-cell!important;padding:4px 2px 9px;text-align:right;border-bottom:2px solid var(--line)}
- #overviewCard tr.mobile-actions .actions{display:flex;justify-content:flex-end;gap:5px;flex-wrap:wrap}
- #overviewCard tr.mobile-actions button{padding:5px 7px;font-size:11px}
-}
-@media(min-width:651px){#overviewCard tr.mobile-actions{display:none}}
-@media print{#overviewCard tr.mobile-actions{display:none!important}}
 
 /* v3.2: full-width task input; microphone on its own line. */
 #entryCard .microw{display:flex;flex-direction:column;align-items:stretch;gap:8px}
@@ -94,255 +58,49 @@ main,.card,#overviewCard,.tablewrap{min-width:0;max-width:100%}
 .grid>.field{min-width:0}.field input,.field select,.field textarea{min-width:0;max-width:100%;box-sizing:border-box}
 .time-combo{display:flex;align-items:stretch;gap:6px;min-width:0;width:100%}.time-combo>input{flex:1 1 0;min-width:0;width:1px}.time-picker-trigger{flex:0 0 43px;width:43px;padding:7px 0;border:1px solid #c8e4e1;background:#e5f5f3;color:#087f82;font-size:24px}
 .dictation-panel{margin-top:12px}.dictation-panel textarea{font-size:16px}.dictation-panel button{justify-self:start}.dictation-panel p{margin:0}
-.backup-choices{display:flex;gap:8px;flex-wrap:wrap}.overview-toggle-row{margin:4px 0 12px!important}.overview-toggle-row button{flex:0 0 auto!important;width:auto!important}
-#overviewCard table{table-layout:fixed;width:100%;min-width:0}#overviewCard th,#overviewCard td{overflow-wrap:anywhere}#overviewCard th:nth-child(1),#overviewCard th:nth-child(2){width:14%}#overviewCard th:nth-child(3){width:14%}#overviewCard th:nth-child(4){width:12%}#overviewCard th:nth-child(5){width:36%}#overviewCard th:nth-child(6){width:10%}
-#overviewCard .row-actions{white-space:normal;text-align:center;padding:3px 1px}#overviewCard .row-actions button{display:inline-flex;align-items:center;justify-content:center;width:25px;height:26px;padding:0;margin:1px;border-radius:6px;font-size:19px;line-height:1;vertical-align:middle}#overviewCard .row-actions .delete-icon{color:#b52c2c;background:#ffebeb;border:1px solid #e8a5a5}
-@media(max-width:650px){.grid{grid-template-columns:1fr}.grid>.field[style*="grid-column:2"]{grid-column:1!important}#overviewCard table{font-size:11px}#overviewCard th,#overviewCard td{padding:4px 2px}#overviewCard th{font-size:10px}#overviewCard td{font-size:11px}#overviewCard .cell-edit{min-width:0!important;width:100%;font-size:11px;padding:4px 1px}#overviewCard .time-edit{font-size:10px}#overviewCard .row-actions button{width:24px;height:25px}#overviewCard .row-actions .compact-end{font-size:15px}}
+.backup-choices{display:flex;gap:8px;flex-wrap:wrap}
 .time-dialog{position:fixed;inset:0;z-index:20000;background:#0008;display:flex;align-items:center;justify-content:center;padding:18px}.time-dialog[hidden]{display:none}.time-dialog-box{width:min(350px,100%);background:#fff;border-radius:14px;padding:18px;box-shadow:0 8px 30px #0004}.time-dialog-box h3{margin:0 0 12px}.time-selects{display:flex;gap:10px;align-items:center;justify-content:center}.time-selects select{font-size:22px;text-align:center;flex:1;min-width:0;max-height:170px}.time-dialog-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
 
-/* Version 3.4: identische Öffnen/Schließen-Bedienung in allen drei Karten */
-#overviewCard.collapsed{background:transparent;border:0;box-shadow:none;padding:0}
-#overviewCard.collapsed .overview-toggle-row{margin:0!important}
-#overviewCard.collapsed .overview-toggle-row button{display:block;width:100%!important;flex:1 1 100%!important;padding:11px 14px!important;background:var(--navy);color:#fff;border:0;border-radius:10px;text-align:center}
-#overviewCard:not(.collapsed){position:relative;padding-top:20px}
-#overviewCard:not(.collapsed)>.overview-toggle-row{position:absolute;top:12px;right:18px;margin:0!important;z-index:1}
-#overviewCard:not(.collapsed)>#overviewHeading{padding-right:240px;min-height:43px}
-#overviewCard:not(.collapsed)>.overview-toggle-row button{background:var(--navy);color:white;border:0}
-#setup.collapsed>.actions:has(#toggleDienstangaben) button,#entryCard.collapsed>.actions:has(#newEntry) button{width:100%;flex:1 1 100%;background:var(--navy);color:white}
-#taetigkeit,#allDictation{min-height:112px;resize:vertical;line-height:1.4}
-@media(max-width:650px){#overviewCard:not(.collapsed)>#overviewHeading{padding-right:0;padding-top:46px;min-height:0}#overviewCard:not(.collapsed)>.overview-toggle-row{top:10px;right:12px}}
 
-/* Version 3.5: three uniform accordion bars and unobtrusive close buttons. */
-#setup.collapsed,#entryCard.collapsed,#overviewCard.collapsed{background:transparent;border:0;box-shadow:none;padding:0}
-#setup.collapsed>.actions,#entryCard.collapsed>.actions,#overviewCard.collapsed>.overview-toggle-row{margin:0!important;display:block}
-#setup.collapsed #toggleDienstangaben,#entryCard.collapsed #newEntry,#overviewCard.collapsed #toggleOverview{
- display:block!important;position:relative;width:100%!important;max-width:none!important;flex:none!important;
- background:var(--navy)!important;color:white!important;border:0!important;border-radius:10px!important;
- padding:14px 43px!important;text-align:center!important;font-size:1rem!important;font-weight:700!important;
-}
-#setup.collapsed #toggleDienstangaben::after,#entryCard.collapsed #newEntry::after,#overviewCard.collapsed #toggleOverview::after{
- content:'⌄';position:absolute;right:17px;top:50%;transform:translateY(-56%);font-size:1.55rem;font-weight:400;line-height:1;
-}
-#setup:not(.collapsed) #toggleDienstangaben,#entryCard:not(.collapsed) #newEntry,#overviewCard:not(.collapsed) #toggleOverview{
- background:#fbe9e9!important;color:#9c3333!important;border:1px solid #e8bdbd!important;
- font-size:.82rem!important;padding:7px 10px!important;border-radius:8px!important;width:auto!important;min-width:0!important;flex:none!important;
-}
-#overviewCard th{overflow-wrap:normal!important;word-break:normal!important;white-space:nowrap}
-.dictation-panel .dictation-heading{display:inline-block;width:fit-content;padding:7px 11px;border-radius:8px;
- background:#e7f5f3;color:#006c70;font-size:1rem;font-weight:800;letter-spacing:.015em}
-@media(max-width:650px){
- #overviewCard table{table-layout:fixed!important;width:100%!important;min-width:0!important}
- #overviewCard th,#overviewCard td{padding-left:2px!important;padding-right:2px!important}
- #overviewCard th{font-size:clamp(8px,2.5vw,11px)!important;letter-spacing:-.2px}
- #overviewCard th:nth-child(1),#overviewCard td:nth-child(1){width:15%!important}
- #overviewCard th:nth-child(2),#overviewCard td:nth-child(2){width:15%!important}
- #overviewCard th:nth-child(3),#overviewCard td:nth-child(3){width:15%!important}
- #overviewCard th:nth-child(4),#overviewCard td:nth-child(4){width:16%!important}
- #overviewCard th:nth-child(5),#overviewCard td:nth-child(5){width:30%!important}
- #overviewCard th:nth-child(6),#overviewCard td:nth-child(6){width:9%!important;display:table-cell!important}
- #overviewCard .row-actions button{width:22px!important;height:23px!important;font-size:17px!important;margin:1px 0!important}
- #overviewCard .row-actions .compact-end{font-size:12px!important}
- #overviewCard .cell-edit{font-size:10px!important}
- #overviewCard .time-edit{font-size:9px!important;letter-spacing:-.5px}
-}
 
-/* v3.6 – three centered, numbered accordion bars, both open and closed. */
-header{background:#08666c;text-align:center;padding:22px 16px}
-header h1{font-size:clamp(1.15rem,4.5vw,1.5rem);line-height:1.35}
-#setup,#entryCard,#overviewCard{display:flex;flex-direction:column;gap:0}
-#setup>.actions:has(#toggleDienstangaben),#entryCard>.actions:has(#newEntry),#overviewCard>.overview-toggle-row{
- order:-1!important;position:static!important;inset:auto!important;display:block!important;
- margin:0 0 12px!important;width:100%!important;z-index:auto!important;
-}
-#setup.collapsed>.actions:has(#toggleDienstangaben),#entryCard.collapsed>.actions:has(#newEntry),#overviewCard.collapsed>.overview-toggle-row{margin:0!important}
-#setup #toggleDienstangaben,#entryCard #newEntry,#overviewCard #toggleOverview{
- display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;
- width:100%!important;min-height:58px!important;max-width:none!important;
- padding:12px 8px!important;margin:0!important;position:relative!important;
- background:#20a9ad!important;color:white!important;border:0!important;border-radius:10px!important;
- font-size:clamp(12px,3.8vw,16px)!important;font-weight:700!important;text-align:center!important;
- flex:none!important;line-height:1.3!important;white-space:normal!important;
-}
-#setup #toggleDienstangaben::before,#entryCard #newEntry::before,#overviewCard #toggleOverview::before{
- content:'1';display:inline-flex;align-items:center;justify-content:center;flex:0 0 27px;
- width:27px;height:27px;border:1px solid white;border-radius:50%;font-size:14px;line-height:1;
-}
-#entryCard #newEntry::before{content:'2'}
-#overviewCard #toggleOverview::before{content:'3'}
-#setup #toggleDienstangaben::after,#entryCard #newEntry::after,#overviewCard #toggleOverview::after{
- content:''!important;display:inline-block;position:static!important;inset:auto!important;
- width:9px;height:9px;border-right:2px solid white;border-bottom:2px solid white;
- transform:translateY(-2px) rotate(45deg)!important;flex:0 0 9px;
-}
-#setup:not(.collapsed) #toggleDienstangaben::after,#entryCard:not(.collapsed) #newEntry::after,#overviewCard:not(.collapsed) #toggleOverview::after{
- transform:translateY(3px) rotate(225deg)!important;
-}
-#setup:not(.collapsed),#entryCard:not(.collapsed),#overviewCard:not(.collapsed){padding-top:14px!important}
-#setup:not(.collapsed)>#dienstHeading,#entryCard:not(.collapsed)>#entryHeading,#overviewCard:not(.collapsed)>#overviewHeading{
- padding:0!important;min-height:0!important;margin:0 0 12px!important;
-}
-#setup:not(.collapsed)>#dienstHeading h2,#entryCard:not(.collapsed)>#entryHeading,#overviewCard:not(.collapsed)>#overviewHeading h2{display:none!important}
-#setup.collapsed,#entryCard.collapsed,#overviewCard.collapsed{padding:0!important}
-@media(max-width:650px){#setup:not(.collapsed)>#dienstHeading,#entryCard:not(.collapsed)>#entryHeading,#overviewCard:not(.collapsed)>#overviewHeading{padding:0!important}}
+/* Einheitliche Darstellung: genau eine Regelgruppe für alle drei Klappleisten. */
+header{background:#08666c;text-align:center;padding:20px 4px}
+header h1{font-size:clamp(15px,4.5vw,27px);line-height:1.25;letter-spacing:-.025em;white-space:nowrap}
+#setup,#entryCard,#overviewCard{display:flex;flex-direction:column;min-width:0}
+#setup>.actions:has(#toggleDienstangaben),#entryCard>.actions:has(#newEntry),#overviewCard>.overview-toggle-row{order:-1;position:static;margin:0 0 14px;width:100%;display:block}
+#setup.collapsed,#entryCard.collapsed,#overviewCard.collapsed{padding:0;background:transparent;border:0;box-shadow:none}
+#setup.collapsed>.actions:has(#toggleDienstangaben),#entryCard.collapsed>.actions:has(#newEntry),#overviewCard.collapsed>.overview-toggle-row{margin:0}
+#setup #toggleDienstangaben,#entryCard #newEntry,#overviewCard #toggleOverview{display:flex;align-items:center;justify-content:center;gap:clamp(16px,4.8vw,24px);width:100%;min-height:58px;padding:12px 4px;background:#20a9ad;color:white;border:0;border-radius:10px;font-size:clamp(11px,3.3vw,16px);font-weight:700;line-height:1.3;white-space:nowrap}
+#setup #toggleDienstangaben::before,#entryCard #newEntry::before,#overviewCard #toggleOverview::before{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;flex:0 0 26px;border:1px solid currentColor;border-radius:50%;font-size:14px}
+#setup #toggleDienstangaben::before{content:'1'}#entryCard #newEntry::before{content:'2'}#overviewCard #toggleOverview::before{content:'3'}
+#setup #toggleDienstangaben::after,#entryCard #newEntry::after,#overviewCard #toggleOverview::after{content:'';display:inline-block;position:static;width:9px;height:9px;flex:0 0 9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg)}
+#setup:not(.collapsed) #toggleDienstangaben::after,#entryCard:not(.collapsed) #newEntry::after,#overviewCard:not(.collapsed) #toggleOverview::after{transform:translateY(3px) rotate(225deg)}
+#dienstHeading h2,#entryHeading,#overviewHeading h2{display:none}
+#setup.collapsed #dienstHeading,#entryCard.collapsed #entryHeading,#overviewCard.collapsed #overviewHeading{display:none}
+#setup:not(.collapsed) #dienstHeading,#overviewCard:not(.collapsed) #overviewHeading{margin-bottom:12px}
+#entryCard:not(.collapsed) #entryHeading{margin:0}
+/* Sechs Spalten, horizontales Scrollen statt Verkleinern oder Ausblenden. */
+#overviewCard .tablewrap{width:100%;max-width:100%;min-width:0;overflow-x:auto;overflow-y:auto;-webkit-overflow-scrolling:touch;border:1px solid #b8dedb;border-radius:10px}
+#overviewCard table{width:100%;min-width:680px;table-layout:fixed;border-collapse:collapse}
+#overviewCard th,#overviewCard td{border:1px solid #c9e5e2;padding:9px 6px;vertical-align:middle;box-sizing:border-box}
+#overviewCard th{background:#e1f4f2;color:#164f52;font-size:12px;text-align:center;white-space:nowrap}
+#overviewCard tbody tr:nth-child(even) td{background:#f3fbfa}
+#overviewCard tbody tr.active-row td{background:#fff9e9}
+#overviewCard th:nth-child(1),#overviewCard th:nth-child(2){width:14%}
+#overviewCard th:nth-child(3),#overviewCard th:nth-child(4){width:13%}
+#overviewCard th:nth-child(5){width:36%}
+#overviewCard th:nth-child(6){width:10%}
+#overviewCard .cell-edit{width:100%;min-width:0;max-width:100%;box-sizing:border-box;font-size:13px}
+#overviewCard .task-edit{min-width:0;min-height:38px;white-space:pre-wrap;overflow-wrap:anywhere;resize:vertical}
+#overviewCard .row-actions{text-align:center;padding:5px 2px}
+#overviewCard .row-actions button{display:inline-flex;align-items:center;justify-content:center;width:25px;height:27px;padding:0;margin:2px;font-size:17px}
+#overviewCard tr.mobile-actions{display:none}
+.dictation-panel .dictation-heading{display:flex;align-items:center;gap:8px;color:#087f82;font-weight:750;font-size:1rem}
+.dictation-mic{width:16px;height:16px;flex:none}
+.dictation-note{font-size:.8rem;color:#658284}
+#taetigkeit,#allDictation{min-height:110px;resize:vertical;line-height:1.45}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.grid>.field[style*="grid-column:2"]{grid-column:1!important}#overviewCard table{min-width:680px}#overviewCard th,#overviewCard td{font-size:12px}}
 @media print{#setup,#entryCard,#overviewCard{display:none!important}}
-
-/* v3.7: The same accordion bar stays visible ABOVE its panel in both states. */
-#setup,#entryCard,#overviewCard{display:flex!important;flex-direction:column!important}
-#setup>.actions:has(#toggleDienstangaben),
-#entryCard>.actions:has(#newEntry),
-#overviewCard>.overview-toggle-row{
-  order:-1!important;position:relative!important;top:auto!important;right:auto!important;
-  left:auto!important;bottom:auto!important;inset:auto!important;
-  display:block!important;width:100%!important;margin:0 0 12px!important;
-  padding:0!important;z-index:1!important;flex:none!important;
-}
-#setup.collapsed>.actions:has(#toggleDienstangaben),
-#entryCard.collapsed>.actions:has(#newEntry),
-#overviewCard.collapsed>.overview-toggle-row{margin-bottom:0!important}
-#setup #toggleDienstangaben,#entryCard #newEntry,#overviewCard #toggleOverview{
-  display:flex!important;align-items:center!important;justify-content:center!important;
-  gap:clamp(11px,3vw,15px)!important;min-height:58px!important;
-  width:100%!important;max-width:none!important;margin:0!important;
-  padding:12px 6px!important;background:#20a9ad!important;color:#fff!important;
-  border:0!important;border-radius:10px!important;box-shadow:none!important;
-  font-size:clamp(11px,3.25vw,15px)!important;font-weight:700!important;
-  text-align:center!important;white-space:nowrap!important;line-height:1.25!important;
-}
-#setup #toggleDienstangaben::before,#entryCard #newEntry::before,#overviewCard #toggleOverview::before{
-  flex:0 0 27px!important;width:27px!important;height:27px!important;
-}
-#setup #toggleDienstangaben::after,#entryCard #newEntry::after,#overviewCard #toggleOverview::after{
-  flex:0 0 9px!important;position:static!important;inset:auto!important;
-  width:9px!important;height:9px!important;
-  transform:translateY(-2px) rotate(45deg)!important;
-}
-#setup:not(.collapsed) #toggleDienstangaben::after,
-#entryCard:not(.collapsed) #newEntry::after,
-#overviewCard:not(.collapsed) #toggleOverview::after{
-  transform:translateY(3px) rotate(225deg)!important;
-}
-header{background:#08666c!important;text-align:center!important;padding:22px 6px!important}
-header h1{font-size:clamp(14px,4.35vw,24px)!important;line-height:1.3!important;white-space:nowrap!important;letter-spacing:-.025em!important}
-
-
-/* v3.8: softly tinted, fully ruled responsive task table */
-#overviewCard .tablewrap{width:100%;max-width:100%;overflow-x:auto!important;border:1px solid #b8dedb;border-radius:11px;background:#fff;-webkit-overflow-scrolling:touch}
-#overviewCard .tablewrap table{border-collapse:collapse!important;table-layout:fixed!important;width:100%!important;min-width:0!important;border:0!important}
-#overviewCard .tablewrap th,#overviewCard .tablewrap td{box-sizing:border-box!important;border:1px solid #c9e5e2!important;vertical-align:middle!important;overflow-wrap:normal!important;word-break:normal!important}
-#overviewCard .tablewrap th{background:#e1f4f2!important;color:#164f52!important;font-weight:750!important;text-align:center!important;white-space:nowrap!important;padding:11px 1px!important}
-#overviewCard .tablewrap td{background:#fff!important;padding:9px 2px!important;text-align:center!important}
-#overviewCard .tablewrap tbody tr:nth-child(even) td{background:#f3fbfa!important}
-#overviewCard .tablewrap tbody tr.active-row td{background:#fff9e9!important}
-#overviewCard .tablewrap th:nth-child(1),#overviewCard .tablewrap td:nth-child(1){width:15%!important}
-#overviewCard .tablewrap th:nth-child(2),#overviewCard .tablewrap td:nth-child(2){width:15%!important}
-#overviewCard .tablewrap th:nth-child(3),#overviewCard .tablewrap td:nth-child(3){width:15%!important}
-#overviewCard .tablewrap th:nth-child(4),#overviewCard .tablewrap td:nth-child(4){width:15%!important}
-#overviewCard .tablewrap th:nth-child(5),#overviewCard .tablewrap td:nth-child(5){width:30%!important;text-align:left!important}
-#overviewCard .tablewrap th:nth-child(6),#overviewCard .tablewrap td:nth-child(6){width:10%!important;text-align:center!important}
-#overviewCard .tablewrap .cell-edit{box-sizing:border-box!important;display:block!important;width:100%!important;min-width:0!important;margin:0!important;border:0!important;background:transparent!important;text-align:center!important;padding:4px 0!important;border-radius:4px!important;font:inherit!important;font-size:clamp(10px,2.7vw,14px)!important;line-height:1.4!important;color:#153b3c!important}
-#overviewCard .tablewrap .time-edit{font-size:clamp(10px,2.55vw,13px)!important;letter-spacing:-.2px!important}
-#overviewCard .tablewrap .task-edit{font-size:clamp(11px,2.8vw,14px)!important;text-align:left!important;resize:vertical!important;min-height:44px!important;height:auto;white-space:pre-wrap!important;overflow-wrap:anywhere!important;word-break:break-word!important;padding:7px 3px!important;line-height:1.45!important}
-#overviewCard .tablewrap .row-actions{padding:6px 1px!important}
-#overviewCard .tablewrap .row-actions button{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:23px!important;height:24px!important;padding:0!important;margin:2px auto!important;vertical-align:middle!important}
-#overviewCard .tablewrap .row-actions .delete-icon{background:#fff0f0!important;color:#b43131!important;border:1px solid #ecc4c4!important}
-#overviewCard .tablewrap th:nth-child(6){font-size:clamp(8px,2.25vw,12px)!important;letter-spacing:-.2px!important}
-@media(min-width:650px){#overviewCard .tablewrap th,#overviewCard .tablewrap td{padding:12px 7px!important}}
-.dictation-panel .dictation-heading{display:flex!important;align-items:center!important;gap:7px!important;width:fit-content!important;padding:2px 0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#087f82!important;font-size:.96rem!important;font-weight:750!important}
-.dictation-mic{width:15px;height:15px;flex:none}
-.dictation-note{margin:0!important;font-size:.79rem!important;color:#658284!important}
-#taetigkeit::placeholder{font-size:clamp(11px,3vw,14px);color:#809699;opacity:1}
-@media(max-width:380px){#overviewCard .tablewrap th{font-size:clamp(8px,2.2vw,10px)!important}#overviewCard .tablewrap td{padding-left:1px!important;padding-right:1px!important}}
-
-
-/* Version 3.9: consistent mobile grid, no clipped headers, centered compact values. */
-#overviewCard .tablewrap{overflow-x:auto!important;overflow-y:hidden!important;max-width:100%!important;width:100%!important;border:1px solid #b8dedb!important;border-radius:11px!important;-webkit-overflow-scrolling:touch!important}
-#overviewCard .tablewrap table{border-collapse:collapse!important;table-layout:fixed!important;width:100%!important;min-width:580px!important}
-#overviewCard .tablewrap th,#overviewCard .tablewrap td{box-sizing:border-box!important;overflow:visible!important;border:1px solid #c9e5e2!important;vertical-align:middle!important;word-break:normal!important;overflow-wrap:normal!important}
-#overviewCard .tablewrap th{background:#e1f4f2!important;color:#164f52!important;font-weight:750!important;text-align:center!important;white-space:nowrap!important;font-size:12px!important;padding:11px 3px!important}
-#overviewCard .tablewrap td{background:#fff!important;text-align:center!important;padding:10px 3px!important}
-#overviewCard .tablewrap tbody tr:nth-child(even) td{background:#f3fbfa!important}
-#overviewCard .tablewrap tbody tr.active-row td{background:#fff9e9!important}
-#overviewCard .tablewrap th:nth-child(1),#overviewCard .tablewrap td:nth-child(1){width:14%!important}
-#overviewCard .tablewrap th:nth-child(2),#overviewCard .tablewrap td:nth-child(2){width:14%!important}
-#overviewCard .tablewrap th:nth-child(3),#overviewCard .tablewrap td:nth-child(3){width:13%!important}
-#overviewCard .tablewrap th:nth-child(4),#overviewCard .tablewrap td:nth-child(4){width:13%!important}
-#overviewCard .tablewrap th:nth-child(5),#overviewCard .tablewrap td:nth-child(5){width:36%!important;text-align:left!important}
-#overviewCard .tablewrap th:nth-child(6),#overviewCard .tablewrap td:nth-child(6){width:10%!important;text-align:center!important;display:table-cell!important}
-#overviewCard .tablewrap th:nth-child(6){font-size:11px!important;letter-spacing:0!important}
-#overviewCard .tablewrap .cell-edit{width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;margin:0!important;border:0!important;background:transparent!important;padding:5px 1px!important;text-align:center!important;font-size:13px!important;line-height:1.45!important}
-#overviewCard .tablewrap .time-edit{font-size:12px!important;letter-spacing:0!important}
-#overviewCard .tablewrap .task-edit{min-height:36px!important;height:auto;resize:none!important;overflow:hidden!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;word-break:break-word!important;text-align:left!important;line-height:1.5!important;padding:7px 4px!important;font-size:13px!important}
-#overviewCard .tablewrap .row-actions{padding:8px 2px!important;text-align:center!important}
-#overviewCard .tablewrap .row-actions button{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:24px!important;height:25px!important;margin:2px auto!important;padding:0!important;flex:0 0 24px!important}
-#overviewCard .tablewrap .row-actions .delete-icon{background:#fff0f0!important;color:#b43131!important;border:1px solid #ecc4c4!important}
-#overviewCard .tablewrap tr.mobile-actions{display:none!important}
-@media(min-width:800px){#overviewCard .tablewrap table{min-width:0!important}}
-
-/* Korrigierte Darstellung: einheitliche, mittig ausgerichtete Klappleisten. */
-header { background:#08666c!important; text-align:center!important; padding:22px 3px!important; }
-header h1 {
-  margin:0!important; color:white; white-space:nowrap!important;
-  font-size:clamp(15px,4.65vw,27px)!important;
-  font-weight:750!important; letter-spacing:-.035em!important; line-height:1.3!important;
-}
-#setup,#entryCard,#overviewCard { display:flex!important; flex-direction:column!important; }
-#setup>.actions:has(#toggleDienstangaben),
-#entryCard>.actions:has(#newEntry),
-#overviewCard>.overview-toggle-row {
-  order:-1!important; position:static!important; inset:auto!important;
-  width:100%!important; margin:0 0 12px!important; padding:0!important;
-}
-#setup.collapsed>.actions:has(#toggleDienstangaben),
-#entryCard.collapsed>.actions:has(#newEntry),
-#overviewCard.collapsed>.overview-toggle-row { margin-bottom:0!important; }
-#setup #toggleDienstangaben,#entryCard #newEntry,#overviewCard #toggleOverview {
-  display:flex!important; align-items:center!important; justify-content:center!important;
-  gap:clamp(12px,3.6vw,16px)!important; width:100%!important;
-  min-height:58px!important; margin:0!important; padding:12px 5px!important;
-  background:#20a9ad!important; color:white!important;
-  border:0!important; border-radius:10px!important;
-  font-size:clamp(11px,3.3vw,16px)!important; font-weight:700!important;
-  line-height:1.25!important; white-space:nowrap!important; text-align:center!important;
-  box-shadow:none!important; position:relative!important; flex:none!important;
-}
-#setup #toggleDienstangaben::before,#entryCard #newEntry::before,#overviewCard #toggleOverview::before {
-  display:inline-flex!important; align-items:center!important; justify-content:center!important;
-  position:static!important; width:27px!important; height:27px!important;
-  flex:0 0 27px!important; border:1px solid white!important; border-radius:50%!important;
-  font-size:14px!important; line-height:1!important;
-}
-#setup #toggleDienstangaben::before { content:"1"!important; }
-#entryCard #newEntry::before { content:"2"!important; }
-#overviewCard #toggleOverview::before { content:"3"!important; }
-#setup #toggleDienstangaben::after,#entryCard #newEntry::after,#overviewCard #toggleOverview::after {
-  content:""!important; display:inline-block!important; position:static!important;
-  width:9px!important; height:9px!important; flex:0 0 9px!important;
-  border:0!important; border-right:2px solid white!important;
-  border-bottom:2px solid white!important;
-  transform:translateY(-2px) rotate(45deg)!important;
-}
-#setup:not(.collapsed) #toggleDienstangaben::after,
-#entryCard:not(.collapsed) #newEntry::after,
-#overviewCard:not(.collapsed) #toggleOverview::after {
-  transform:translateY(3px) rotate(225deg)!important;
-}
-#setup:not(.collapsed),#entryCard:not(.collapsed),#overviewCard:not(.collapsed) {
-  padding-top:14px!important;
-}
-#overviewCard .tablewrap { overflow-x:auto!important; -webkit-overflow-scrolling:touch; }
-#overviewCard .tablewrap table { min-width:580px!important; table-layout:fixed!important; }
-#overviewCard .tablewrap th,#overviewCard .tablewrap td {
-  border:1px solid #c9e5e2!important; vertical-align:middle!important;
-}
-#overviewCard .tablewrap th { background:#e1f4f2!important; text-align:center!important; }
-#overviewCard .tablewrap tbody tr:nth-child(even) td { background:#f3fbfa!important; }
-#overviewCard .tablewrap th:nth-child(6),#overviewCard .tablewrap td:nth-child(6) {
-  display:table-cell!important;
-}
-#overviewCard .tablewrap .task-edit { text-align:left!important; white-space:pre-wrap!important; overflow-wrap:anywhere!important; }
-#overviewCard tr.mobile-actions { display:none!important; }
-@media(min-width:800px) { #overviewCard .tablewrap table { min-width:0!important; } }
-@media print { #setup,#entryCard,#overviewCard { display:none!important; } }
 
 </style></head>
 <body>
@@ -503,7 +261,7 @@ function exportPDF(){
 function startRecognition(target,continuous=false){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){notify('Dieser Browser bietet keine kompatible Spracheingabe. Auf dem iPhone bitte Safari über eine HTTPS-Webadresse testen; alternativ die iPhone-Tastatur-Diktierfunktion nutzen.');return null}if(location.protocol!=='https:'&&location.hostname!=='localhost'&&location.protocol!=='file:'){notify('Für Mikrofonzugriff wird normalerweise eine sichere HTTPS-Verbindung benötigt.');return null}const rec=new SR();rec.lang='de-DE';rec.interimResults=true;rec.continuous=continuous;let final='';rec.onresult=e=>{let interim='';for(let i=e.resultIndex;i<e.results.length;i++){const t=e.results[i][0].transcript;if(e.results[i].isFinal)final+=t+' ';else interim+=t}if(target==='all'){const text=(final+interim).trim();parseVoice(text,false)}else $(target).value=(final+interim).trim()};rec.onerror=e=>notify('Spracheingabe: '+(e.error==='not-allowed'?'Mikrofonzugriff nicht erlaubt.':e.error));rec.onend=()=>{if(target==='all'&&final.trim())parseVoice(final.trim(),true);if(target==='taetigkeit'&&final.trim())$('taetigkeit').value=final.trim().replace(/[.\s]+$/,'')};try{rec.start();listening=rec;return rec}catch(e){notify('Mikrofon konnte nicht gestartet werden.');return null}}
 function normalizeStationWords(text){
  const numbers={eins:'1',ein:'1',eine:'1',zwei:'2',drei:'3',vier:'4',fünf:'5',fuenf:'5',sechs:'6'};
- return String(text||'').replace(/\\b(station\\s+)([a-z])\\s+(eins|ein|eine|zwei|drei|vier|fünf|fuenf|sechs)\\b/gi,
+ return String(text||'').replace(/\b(station\s+)([a-z])\s+(eins|ein|eine|zwei|drei|vier|fünf|fuenf|sechs)\b/gi,
    (all,label,letter,word)=>label+letter.toUpperCase()+(numbers[word.toLocaleLowerCase('de')]||word));
 }
 function normalizeRoomWords(text){
