@@ -277,6 +277,73 @@ header h1{font-size:clamp(14px,4.35vw,24px)!important;line-height:1.3!important;
 #overviewCard .tablewrap .row-actions .delete-icon{background:#fff0f0!important;color:#b43131!important;border:1px solid #ecc4c4!important}
 #overviewCard .tablewrap tr.mobile-actions{display:none!important}
 @media(min-width:800px){#overviewCard .tablewrap table{min-width:0!important}}
+
+/* Korrigierte Darstellung: einheitliche, mittig ausgerichtete Klappleisten. */
+header { background:#08666c!important; text-align:center!important; padding:22px 3px!important; }
+header h1 {
+  margin:0!important; color:white; white-space:nowrap!important;
+  font-size:clamp(15px,4.65vw,27px)!important;
+  font-weight:750!important; letter-spacing:-.035em!important; line-height:1.3!important;
+}
+#setup,#entryCard,#overviewCard { display:flex!important; flex-direction:column!important; }
+#setup>.actions:has(#toggleDienstangaben),
+#entryCard>.actions:has(#newEntry),
+#overviewCard>.overview-toggle-row {
+  order:-1!important; position:static!important; inset:auto!important;
+  width:100%!important; margin:0 0 12px!important; padding:0!important;
+}
+#setup.collapsed>.actions:has(#toggleDienstangaben),
+#entryCard.collapsed>.actions:has(#newEntry),
+#overviewCard.collapsed>.overview-toggle-row { margin-bottom:0!important; }
+#setup #toggleDienstangaben,#entryCard #newEntry,#overviewCard #toggleOverview {
+  display:flex!important; align-items:center!important; justify-content:center!important;
+  gap:clamp(12px,3.6vw,16px)!important; width:100%!important;
+  min-height:58px!important; margin:0!important; padding:12px 5px!important;
+  background:#20a9ad!important; color:white!important;
+  border:0!important; border-radius:10px!important;
+  font-size:clamp(11px,3.3vw,16px)!important; font-weight:700!important;
+  line-height:1.25!important; white-space:nowrap!important; text-align:center!important;
+  box-shadow:none!important; position:relative!important; flex:none!important;
+}
+#setup #toggleDienstangaben::before,#entryCard #newEntry::before,#overviewCard #toggleOverview::before {
+  display:inline-flex!important; align-items:center!important; justify-content:center!important;
+  position:static!important; width:27px!important; height:27px!important;
+  flex:0 0 27px!important; border:1px solid white!important; border-radius:50%!important;
+  font-size:14px!important; line-height:1!important;
+}
+#setup #toggleDienstangaben::before { content:"1"!important; }
+#entryCard #newEntry::before { content:"2"!important; }
+#overviewCard #toggleOverview::before { content:"3"!important; }
+#setup #toggleDienstangaben::after,#entryCard #newEntry::after,#overviewCard #toggleOverview::after {
+  content:""!important; display:inline-block!important; position:static!important;
+  width:9px!important; height:9px!important; flex:0 0 9px!important;
+  border:0!important; border-right:2px solid white!important;
+  border-bottom:2px solid white!important;
+  transform:translateY(-2px) rotate(45deg)!important;
+}
+#setup:not(.collapsed) #toggleDienstangaben::after,
+#entryCard:not(.collapsed) #newEntry::after,
+#overviewCard:not(.collapsed) #toggleOverview::after {
+  transform:translateY(3px) rotate(225deg)!important;
+}
+#setup:not(.collapsed),#entryCard:not(.collapsed),#overviewCard:not(.collapsed) {
+  padding-top:14px!important;
+}
+#overviewCard .tablewrap { overflow-x:auto!important; -webkit-overflow-scrolling:touch; }
+#overviewCard .tablewrap table { min-width:580px!important; table-layout:fixed!important; }
+#overviewCard .tablewrap th,#overviewCard .tablewrap td {
+  border:1px solid #c9e5e2!important; vertical-align:middle!important;
+}
+#overviewCard .tablewrap th { background:#e1f4f2!important; text-align:center!important; }
+#overviewCard .tablewrap tbody tr:nth-child(even) td { background:#f3fbfa!important; }
+#overviewCard .tablewrap th:nth-child(6),#overviewCard .tablewrap td:nth-child(6) {
+  display:table-cell!important;
+}
+#overviewCard .tablewrap .task-edit { text-align:left!important; white-space:pre-wrap!important; overflow-wrap:anywhere!important; }
+#overviewCard tr.mobile-actions { display:none!important; }
+@media(min-width:800px) { #overviewCard .tablewrap table { min-width:0!important; } }
+@media print { #setup,#entryCard,#overviewCard { display:none!important; } }
+
 </style></head>
 <body>
 <header><h1>Mein persönliches Hausdienst-Protokoll</h1></header>
@@ -434,12 +501,17 @@ function exportPDF(){
  window.print();
 }
 function startRecognition(target,continuous=false){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){notify('Dieser Browser bietet keine kompatible Spracheingabe. Auf dem iPhone bitte Safari über eine HTTPS-Webadresse testen; alternativ die iPhone-Tastatur-Diktierfunktion nutzen.');return null}if(location.protocol!=='https:'&&location.hostname!=='localhost'&&location.protocol!=='file:'){notify('Für Mikrofonzugriff wird normalerweise eine sichere HTTPS-Verbindung benötigt.');return null}const rec=new SR();rec.lang='de-DE';rec.interimResults=true;rec.continuous=continuous;let final='';rec.onresult=e=>{let interim='';for(let i=e.resultIndex;i<e.results.length;i++){const t=e.results[i][0].transcript;if(e.results[i].isFinal)final+=t+' ';else interim+=t}if(target==='all'){const text=(final+interim).trim();parseVoice(text,false)}else $(target).value=(final+interim).trim()};rec.onerror=e=>notify('Spracheingabe: '+(e.error==='not-allowed'?'Mikrofonzugriff nicht erlaubt.':e.error));rec.onend=()=>{if(target==='all'&&final.trim())parseVoice(final.trim(),true);if(target==='taetigkeit'&&final.trim())$('taetigkeit').value=final.trim().replace(/[.\s]+$/,'')};try{rec.start();listening=rec;return rec}catch(e){notify('Mikrofon konnte nicht gestartet werden.');return null}}
+function normalizeStationWords(text){
+ const numbers={eins:'1',ein:'1',eine:'1',zwei:'2',drei:'3',vier:'4',fünf:'5',fuenf:'5',sechs:'6'};
+ return String(text||'').replace(/\\b(station\\s+)([a-z])\\s+(eins|ein|eine|zwei|drei|vier|fünf|fuenf|sechs)\\b/gi,
+   (all,label,letter,word)=>label+letter.toUpperCase()+(numbers[word.toLocaleLowerCase('de')]||word));
+}
 function normalizeRoomWords(text){
  const numbers={null:'0',eins:'1',ein:'1',eine:'1',zwei:'2',drei:'3',vier:'4','fünf':'5',fuenf:'5',sechs:'6',sieben:'7',acht:'8',neun:'9',zehn:'10',elf:'11','zwölf':'12',zwoelf:'12',dreizehn:'13',vierzehn:'14','fünfzehn':'15',fuenfzehn:'15',sechzehn:'16',siebzehn:'17',achtzehn:'18',neunzehn:'19',zwanzig:'20'};
  return String(text||'').replace(/\b(zimmer(?:nummer)?|raum)(\s*(?:nr\.?|nummer)?\s*)(null|eins|ein|eine|zwei|drei|vier|fünf|fuenf|sechs|sieben|acht|neun|zehn|elf|zwölf|zwoelf|dreizehn|vierzehn|fünfzehn|fuenfzehn|sechzehn|siebzehn|achtzehn|neunzehn|zwanzig)\b/gi,(all,label,space,word)=>label+space+(numbers[word.toLocaleLowerCase('de')]||word));
 }
 function parseVoice(text,final){
- const spoken=normalizeRoomWords(text).trim();if(!spoken)return;
+ const spoken=normalizeStationWords(normalizeRoomWords(text)).trim();if(!spoken)return;
  let task=spoken;
  // Entire labeled phrases must be removed, not just the captured room number.
  const stationPattern=/(?:\bstation\s*)?\b(I[1-4]|E2|D[456]|F(?:31|41|51)|G3[12]|MAKS)\b/i;
@@ -473,7 +545,7 @@ const calendarOverlay=document.createElement('div');calendarOverlay.className='m
 let calendarMonth=new Date();
 function drawCalendar(){const year=calendarMonth.getFullYear(),month=calendarMonth.getMonth();$('calMonth').textContent=calendarMonth.toLocaleDateString('de-DE',{month:'long',year:'numeric'});const days=$('calDays');days.replaceChildren();for(const day of ['Mo','Di','Mi','Do','Fr','Sa','So']){const el=document.createElement('span');el.textContent=day;days.appendChild(el)}const offset=(new Date(year,month,1).getDay()+6)%7;for(let i=0;i<offset;i++)days.appendChild(document.createElement('span'));const n=new Date(year,month+1,0).getDate();for(let day=1;day<=n;day++){const button=document.createElement('button');button.type='button';button.textContent=day;button.className='calendar-day';button.addEventListener('click',()=>{const iso=year+'-'+String(month+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');$('datum').value=formatDateDE(iso);$('datum').dispatchEvent(new Event('change',{bubbles:true}));calendarOverlay.hidden=true});days.appendChild(button)}}
 $('datumPicker').addEventListener('click',()=>{const iso=parseDateISO($('datum').value);calendarMonth=iso?new Date(iso+'T12:00:00'):new Date();drawCalendar();calendarOverlay.hidden=false});$('calPrev').onclick=()=>{calendarMonth.setMonth(calendarMonth.getMonth()-1);drawCalendar()};$('calNext').onclick=()=>{calendarMonth.setMonth(calendarMonth.getMonth()+1);drawCalendar()};$('calClose').onclick=()=>calendarOverlay.hidden=true;calendarOverlay.addEventListener('click',e=>{if(e.target===calendarOverlay)calendarOverlay.hidden=true});
-$('datum').addEventListener('change',updateWeekday);$('clearEntry').onclick=clearEntry;$('export').onclick=exportPDF;$('backup').onclick=backupData;$('restore').onclick=()=>$('restoreFile').click();$('restoreFile').addEventListener('change',restoreData);$('allDictation').addEventListener('input',()=>{const el=$('allDictation'),start=el.selectionStart,old=el.value,normalized=normalizeRoomWords(old);if(normalized!==old){el.value=normalized;const delta=normalized.length-old.length;el.setSelectionRange(Math.max(0,start+delta),Math.max(0,start+delta))}});$('allDictation').addEventListener('change',()=>{$('allDictation').value=normalizeRoomWords($('allDictation').value)});$('applyDictation').onclick=()=>{const v=normalizeRoomWords($('allDictation').value).trim();if(!v){notify('Bitte zuerst Text eingeben oder über die Tastatur diktieren.');return}parseVoice(v,true);$('allDictation').value=''};$('backupMenu').onclick=()=>{$('backupChoices').classList.toggle('hidden')};
+$('datum').addEventListener('change',updateWeekday);$('clearEntry').onclick=clearEntry;$('export').onclick=exportPDF;$('backup').onclick=backupData;$('restore').onclick=()=>$('restoreFile').click();$('restoreFile').addEventListener('change',restoreData);$('allDictation').addEventListener('input',()=>{const el=$('allDictation'),start=el.selectionStart,old=el.value,normalized=normalizeStationWords(normalizeRoomWords(old));if(normalized!==old){el.value=normalized;const delta=normalized.length-old.length;el.setSelectionRange(Math.max(0,start+delta),Math.max(0,start+delta))}});$('allDictation').addEventListener('change',()=>{$('allDictation').value=normalizeStationWords(normalizeRoomWords($('allDictation').value))});$('applyDictation').onclick=()=>{const v=normalizeStationWords(normalizeRoomWords($('allDictation').value)).trim();if(!v){notify('Bitte zuerst Text eingeben oder über die Tastatur diktieren.');return}parseVoice(v,true);$('allDictation').value=''};$('backupMenu').onclick=()=>{$('backupChoices').classList.toggle('hidden')};
 
 // Eigenständige Uhr-Auswahl: Antippen des Feldes erlaubt Texteingabe, Symbol öffnet die Auswahl.
 const timeDialog=document.createElement('div');timeDialog.className='time-dialog';timeDialog.hidden=true;
