@@ -1,4 +1,1 @@
-Hausdienst-PWA Version 3.3
-Alle sechs Dateien im Hauptverzeichnis von GitHub Pages hochladen.
-Vor dem Update eine JSON-Datensicherung erstellen. Die App nicht deinstallieren oder Website-Daten löschen.
-Neu: Tastatur-Diktat mit lokaler Verteilung, einheitliche Zeitfelder mit separater Uhr-Auswahl, kompakte Löschsymbole, einklappbare Übersicht und gemeinsames Backup-Menü.
+Hausdienst-PWA Version 3.4. Alle sechs Dateien ins Hauptverzeichnis des GitHub-Repositories hochladen. Vorher Sicherung aufbewahren. App nicht deinstallieren.
