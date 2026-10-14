@@ -253,6 +253,30 @@ header h1{font-size:clamp(14px,4.35vw,24px)!important;line-height:1.3!important;
 #taetigkeit::placeholder{font-size:clamp(11px,3vw,14px);color:#809699;opacity:1}
 @media(max-width:380px){#overviewCard .tablewrap th{font-size:clamp(8px,2.2vw,10px)!important}#overviewCard .tablewrap td{padding-left:1px!important;padding-right:1px!important}}
 
+
+/* Version 3.9: consistent mobile grid, no clipped headers, centered compact values. */
+#overviewCard .tablewrap{overflow-x:auto!important;overflow-y:hidden!important;max-width:100%!important;width:100%!important;border:1px solid #b8dedb!important;border-radius:11px!important;-webkit-overflow-scrolling:touch!important}
+#overviewCard .tablewrap table{border-collapse:collapse!important;table-layout:fixed!important;width:100%!important;min-width:580px!important}
+#overviewCard .tablewrap th,#overviewCard .tablewrap td{box-sizing:border-box!important;overflow:visible!important;border:1px solid #c9e5e2!important;vertical-align:middle!important;word-break:normal!important;overflow-wrap:normal!important}
+#overviewCard .tablewrap th{background:#e1f4f2!important;color:#164f52!important;font-weight:750!important;text-align:center!important;white-space:nowrap!important;font-size:12px!important;padding:11px 3px!important}
+#overviewCard .tablewrap td{background:#fff!important;text-align:center!important;padding:10px 3px!important}
+#overviewCard .tablewrap tbody tr:nth-child(even) td{background:#f3fbfa!important}
+#overviewCard .tablewrap tbody tr.active-row td{background:#fff9e9!important}
+#overviewCard .tablewrap th:nth-child(1),#overviewCard .tablewrap td:nth-child(1){width:14%!important}
+#overviewCard .tablewrap th:nth-child(2),#overviewCard .tablewrap td:nth-child(2){width:14%!important}
+#overviewCard .tablewrap th:nth-child(3),#overviewCard .tablewrap td:nth-child(3){width:13%!important}
+#overviewCard .tablewrap th:nth-child(4),#overviewCard .tablewrap td:nth-child(4){width:13%!important}
+#overviewCard .tablewrap th:nth-child(5),#overviewCard .tablewrap td:nth-child(5){width:36%!important;text-align:left!important}
+#overviewCard .tablewrap th:nth-child(6),#overviewCard .tablewrap td:nth-child(6){width:10%!important;text-align:center!important;display:table-cell!important}
+#overviewCard .tablewrap th:nth-child(6){font-size:11px!important;letter-spacing:0!important}
+#overviewCard .tablewrap .cell-edit{width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;margin:0!important;border:0!important;background:transparent!important;padding:5px 1px!important;text-align:center!important;font-size:13px!important;line-height:1.45!important}
+#overviewCard .tablewrap .time-edit{font-size:12px!important;letter-spacing:0!important}
+#overviewCard .tablewrap .task-edit{min-height:36px!important;height:auto;resize:none!important;overflow:hidden!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;word-break:break-word!important;text-align:left!important;line-height:1.5!important;padding:7px 4px!important;font-size:13px!important}
+#overviewCard .tablewrap .row-actions{padding:8px 2px!important;text-align:center!important}
+#overviewCard .tablewrap .row-actions button{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:24px!important;height:25px!important;margin:2px auto!important;padding:0!important;flex:0 0 24px!important}
+#overviewCard .tablewrap .row-actions .delete-icon{background:#fff0f0!important;color:#b43131!important;border:1px solid #ecc4c4!important}
+#overviewCard .tablewrap tr.mobile-actions{display:none!important}
+@media(min-width:800px){#overviewCard .tablewrap table{min-width:0!important}}
 </style></head>
 <body>
 <header><h1>Mein persönliches Hausdienst-Protokoll</h1></header>
@@ -290,7 +314,7 @@ header h1{font-size:clamp(14px,4.35vw,24px)!important;line-height:1.3!important;
 </div>
 </section>
 
-<section class="card hidden" id="overviewCard"><div class="topline" id="overviewHeading"><h2>Übersicht aller Tätigkeiten im Dienst</h2><span id="count" class="small">0 Tätigkeiten</span></div><div class="actions no-print overview-toggle-row"><button id="toggleOverview" type="button">✕ Schließe: Übersicht</button></div><div id="overviewDetails"><div class="actions no-print" style="margin:0 0 12px"><button id="export" class="secondary">Dienstbericht exportieren (PDF)</button><button id="backupMenu" class="secondary" type="button">Datensicherung ▾</button><div id="backupChoices" class="backup-choices hidden"><button id="backup" class="secondary" type="button">Sicherung erstellen</button><button id="restore" class="secondary" type="button">Sicherung einlesen</button></div><input id="restoreFile" type="file" accept="application/json,.json" class="hidden"></div><div class="tablewrap"><table><thead><tr><th>Beginn</th><th>Ende</th><th>Station</th><th>Zimmer</th><th>Tätigkeit</th><th class="no-print">Aktion</th></tr></thead><tbody id="rows"><tr><td colspan="6" class="small">Noch keine Tätigkeiten erfasst.</td></tr></tbody></table></div><p class="footer-note">Der PDF-Export öffnet den Druckdialog des Geräts. Die Datensicherung erzeugt eine lokale JSON-Datei, die du sicher aufbewahren solltest. Dort „Als PDF speichern“ wählen. Tätigkeitsdauer und Dienstzeit werden nicht automatisch als gleichbedeutend bewertet; parallele Tätigkeiten können sich überschneiden.</p></div></section>
+<section class="card hidden" id="overviewCard"><div class="topline" id="overviewHeading"><h2>Übersicht aller Tätigkeiten im Dienst</h2><span id="count" class="small">0 Tätigkeiten</span></div><div class="actions no-print overview-toggle-row"><button id="toggleOverview" type="button">Übersicht aller Tätigkeiten</button></div><div id="overviewDetails"><div class="actions no-print" style="margin:0 0 12px"><button id="export" class="secondary">Dienstbericht exportieren (PDF)</button><button id="backupMenu" class="secondary" type="button">Datensicherung ▾</button><div id="backupChoices" class="backup-choices hidden"><button id="backup" class="secondary" type="button">Sicherung erstellen</button><button id="restore" class="secondary" type="button">Sicherung einlesen</button></div><input id="restoreFile" type="file" accept="application/json,.json" class="hidden"></div><div class="tablewrap"><table><thead><tr><th>Beginn</th><th>Ende</th><th>Station</th><th>Zimmer</th><th>Tätigkeit</th><th class="no-print">Aktion</th></tr></thead><tbody id="rows"><tr><td colspan="6" class="small">Noch keine Tätigkeiten erfasst.</td></tr></tbody></table></div><p class="footer-note">Der PDF-Export öffnet den Druckdialog des Geräts. Die Datensicherung erzeugt eine lokale JSON-Datei, die du sicher aufbewahren solltest. Dort „Als PDF speichern“ wählen. Tätigkeitsdauer und Dienstzeit werden nicht automatisch als gleichbedeutend bewertet; parallele Tätigkeiten können sich überschneiden.</p></div></section>
 <section id="printReport" class="print-only"></section>
 <div id="message" role="status"></div>
 </main>
@@ -332,6 +356,7 @@ function renderTasks(){
 }
 $('moreTaskSuggestions').onclick=()=>{showMoreTaskSuggestions=!showMoreTaskSuggestions;renderTasks()};
 
+function autoSizeTaskCell(el){el.style.height='auto';el.style.height=Math.max(36,el.scrollHeight)+'px'}
 function renderRows(){
  const rows=[...state.entries].sort((a,b)=>(a.start||'').localeCompare(b.start||''));
  $('count').textContent=rows.length+' Tätigkei'+(rows.length===1?'t':'ten');
@@ -347,6 +372,7 @@ function renderRows(){
      '<td>'+field('task',e.task,'text','task-edit')+'</td>'+
      '<td class="no-print row-actions">'+(active?'<button class="endbtn compact-end" data-end="'+esc(e.id)+'" aria-label="Tätigkeit beenden" title="Tätigkeit beenden">✓</button>':'')+'<button class="danger delete-icon" data-delete="'+esc(e.id)+'" aria-label="Tätigkeit löschen" title="Tätigkeit löschen">×</button></td></tr>' ;
  }).join('');
+ $('rows').querySelectorAll('textarea.task-edit').forEach(autoSizeTaskCell);
  $('rows').querySelectorAll('[data-inline-id]').forEach(input=>{
    const commit=()=>{
      const e=state.entries.find(x=>x.id===input.dataset.inlineId);
@@ -373,6 +399,7 @@ function renderRows(){
      }
      notify('Änderung gespeichert.');
    };
+   if(input.matches('textarea.task-edit'))input.addEventListener('input',()=>autoSizeTaskCell(input));
    input.addEventListener('change',commit);
    input.addEventListener('keydown',ev=>{if(ev.key==='Enter'&&input.tagName!=='TEXTAREA'){ev.preventDefault();input.blur();}});
  });
@@ -446,7 +473,7 @@ const calendarOverlay=document.createElement('div');calendarOverlay.className='m
 let calendarMonth=new Date();
 function drawCalendar(){const year=calendarMonth.getFullYear(),month=calendarMonth.getMonth();$('calMonth').textContent=calendarMonth.toLocaleDateString('de-DE',{month:'long',year:'numeric'});const days=$('calDays');days.replaceChildren();for(const day of ['Mo','Di','Mi','Do','Fr','Sa','So']){const el=document.createElement('span');el.textContent=day;days.appendChild(el)}const offset=(new Date(year,month,1).getDay()+6)%7;for(let i=0;i<offset;i++)days.appendChild(document.createElement('span'));const n=new Date(year,month+1,0).getDate();for(let day=1;day<=n;day++){const button=document.createElement('button');button.type='button';button.textContent=day;button.className='calendar-day';button.addEventListener('click',()=>{const iso=year+'-'+String(month+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');$('datum').value=formatDateDE(iso);$('datum').dispatchEvent(new Event('change',{bubbles:true}));calendarOverlay.hidden=true});days.appendChild(button)}}
 $('datumPicker').addEventListener('click',()=>{const iso=parseDateISO($('datum').value);calendarMonth=iso?new Date(iso+'T12:00:00'):new Date();drawCalendar();calendarOverlay.hidden=false});$('calPrev').onclick=()=>{calendarMonth.setMonth(calendarMonth.getMonth()-1);drawCalendar()};$('calNext').onclick=()=>{calendarMonth.setMonth(calendarMonth.getMonth()+1);drawCalendar()};$('calClose').onclick=()=>calendarOverlay.hidden=true;calendarOverlay.addEventListener('click',e=>{if(e.target===calendarOverlay)calendarOverlay.hidden=true});
-$('datum').addEventListener('change',updateWeekday);$('clearEntry').onclick=clearEntry;$('export').onclick=exportPDF;$('backup').onclick=backupData;$('restore').onclick=()=>$('restoreFile').click();$('restoreFile').addEventListener('change',restoreData);$('allDictation').addEventListener('change',()=>{$('allDictation').value=normalizeRoomWords($('allDictation').value)});$('applyDictation').onclick=()=>{const v=normalizeRoomWords($('allDictation').value).trim();if(!v){notify('Bitte zuerst Text eingeben oder über die Tastatur diktieren.');return}parseVoice(v,true);$('allDictation').value=''};$('backupMenu').onclick=()=>{$('backupChoices').classList.toggle('hidden')};
+$('datum').addEventListener('change',updateWeekday);$('clearEntry').onclick=clearEntry;$('export').onclick=exportPDF;$('backup').onclick=backupData;$('restore').onclick=()=>$('restoreFile').click();$('restoreFile').addEventListener('change',restoreData);$('allDictation').addEventListener('input',()=>{const el=$('allDictation'),start=el.selectionStart,old=el.value,normalized=normalizeRoomWords(old);if(normalized!==old){el.value=normalized;const delta=normalized.length-old.length;el.setSelectionRange(Math.max(0,start+delta),Math.max(0,start+delta))}});$('allDictation').addEventListener('change',()=>{$('allDictation').value=normalizeRoomWords($('allDictation').value)});$('applyDictation').onclick=()=>{const v=normalizeRoomWords($('allDictation').value).trim();if(!v){notify('Bitte zuerst Text eingeben oder über die Tastatur diktieren.');return}parseVoice(v,true);$('allDictation').value=''};$('backupMenu').onclick=()=>{$('backupChoices').classList.toggle('hidden')};
 
 // Eigenständige Uhr-Auswahl: Antippen des Feldes erlaubt Texteingabe, Symbol öffnet die Auswahl.
 const timeDialog=document.createElement('div');timeDialog.className='time-dialog';timeDialog.hidden=true;
