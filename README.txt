@@ -1,10 +1,4 @@
-Hausdienst PWA v3.2 – Layoutkorrektur und Spracheingabe
-
-Tätigkeit: Eingabefeld volle Breite, Mikrofonbutton darunter.
-Mobile Tabelle: fünf Spalten bleiben erhalten; kleine zeilenbezogene Aktionsbuttons.
-Mikrofon: Tippen startet die Web-Spracherkennung, erneutes Tippen beendet sie.
-Hinweis: iOS Home-Screen-PWAs unterstützen die Web Speech API möglicherweise nicht zuverlässig. Alternativ das Mikrofon auf der iPhone-Tastatur verwenden.
-
-Datenspeicher-Schlüssel unverändert: hausdienst-protokoll-v2. Vor Updates Backup erstellen.
-
-Alle sechs Dateien direkt in das GitHub-Repository hochladen.
+Hausdienst-PWA Version 3.3
+Alle sechs Dateien im Hauptverzeichnis von GitHub Pages hochladen.
+Vor dem Update eine JSON-Datensicherung erstellen. Die App nicht deinstallieren oder Website-Daten löschen.
+Neu: Tastatur-Diktat mit lokaler Verteilung, einheitliche Zeitfelder mit separater Uhr-Auswahl, kompakte Löschsymbole, einklappbare Übersicht und gemeinsames Backup-Menü.
