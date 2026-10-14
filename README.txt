@@ -1,1 +1,10 @@
-Hausdienst PWA v3.1 – bisherige Tabelle mit fünf Datenspalten auf schmalen Smartphones. Die Aktionsknöpfe erscheinen unter der jeweiligen Zeile. Desktop bleibt unverändert. Alle sechs Dateien ins bestehende GitHub-Repository hochladen. Vorher Datensicherung als JSON exportieren. Lokale Daten werden durch das reine Code-Update normalerweise nicht gelöscht; App nicht deinstallieren oder Websitedaten löschen. Nach Update ggf. App vollständig schließen und neu öffnen.
+Hausdienst PWA v3.2 – Layoutkorrektur und Spracheingabe
+
+Tätigkeit: Eingabefeld volle Breite, Mikrofonbutton darunter.
+Mobile Tabelle: fünf Spalten bleiben erhalten; kleine zeilenbezogene Aktionsbuttons.
+Mikrofon: Tippen startet die Web-Spracherkennung, erneutes Tippen beendet sie.
+Hinweis: iOS Home-Screen-PWAs unterstützen die Web Speech API möglicherweise nicht zuverlässig. Alternativ das Mikrofon auf der iPhone-Tastatur verwenden.
+
+Datenspeicher-Schlüssel unverändert: hausdienst-protokoll-v2. Vor Updates Backup erstellen.
+
+Alle sechs Dateien direkt in das GitHub-Repository hochladen.

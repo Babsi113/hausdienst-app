@@ -77,6 +77,18 @@ main,.card,#overviewCard,.tablewrap{min-width:0;max-width:100%}
 }
 @media(min-width:651px){#overviewCard tr.mobile-actions{display:none}}
 @media print{#overviewCard tr.mobile-actions{display:none!important}}
+
+/* v3.2: full-width task input; microphone on its own line. */
+#entryCard .microw{display:flex;flex-direction:column;align-items:stretch;gap:8px}
+#entryCard .microw #taetigkeit{width:100%;min-width:0;flex:none;font-size:16px}
+#entryCard .microw #micTask{align-self:flex-start;width:auto;max-width:100%;font-size:14px;padding:9px 12px}
+/* Keep per-entry actions compact, even when global .actions buttons flex:1. */
+@media(max-width:650px){
+ #overviewCard tr.mobile-actions td{padding:2px 4px 8px!important}
+ #overviewCard tr.mobile-actions .actions{display:flex!important;justify-content:flex-end!important;align-items:center;flex-wrap:wrap;gap:6px;margin:0!important}
+ #overviewCard tr.mobile-actions .actions button{flex:0 0 auto!important;width:auto!important;min-width:0!important;display:inline-block!important;padding:5px 8px!important;font-size:11px!important;line-height:1.2}
+ #overviewCard tr.mobile-actions .actions .danger{background:#fff0f0}
+}
 </style></head>
 <body>
 <header><h1>Hausdienst-Protokoll</h1><p>Persönliches Arbeitszeit- und Tätigkeitsprotokoll</p></header>
@@ -105,7 +117,7 @@ main,.card,#overviewCard,.tablewrap{min-width:0;max-width:100%}
 <div class="field"><label for="zimmer">Zimmer</label><input id="zimmer" placeholder="Zimmer eingeben"></div>
 <div class="field"><label for="startzeit">Beginn der Tätigkeit</label><input id="startzeit" type="time"></div>
 <div class="field"><label for="endzeit">Ende (optional, z. B. beim Nachtragen)</label><input id="endzeit" type="time"></div>
-<div class="field" style="grid-column:1/-1"><label for="taetigkeit">Tätigkeit</label><div class="microw"><input id="taetigkeit" list="taskList" placeholder="Tätigkeit eintippen oder diktieren"><button type="button" class="mic" id="micTask" title="Zum Diktieren gedrückt halten">🎙 Halten zum Sprechen</button></div><datalist id="taskList"></datalist></div>
+<div class="field" style="grid-column:1/-1"><label for="taetigkeit">Tätigkeit</label><div class="microw"><input id="taetigkeit" list="taskList" placeholder="Tätigkeit eintippen oder diktieren"><button type="button" class="mic" id="micTask" title="Spracheingabe starten oder stoppen">🎙 Spracheingabe</button></div><datalist id="taskList"></datalist></div>
 </div>
 <div class="small" style="margin-top:12px">Kurze, häufig genutzte Tätigkeiten (eigene Vorschläge erst ab 3 Verwendungen innerhalb von 90 Tagen):</div><div id="taskChips" class="taskchips" style="margin-top:8px"></div><div class="actions no-print"><button id="moreTaskSuggestions" type="button" class="secondary hidden">Weitere Vorschläge anzeigen</button></div>
 <div class="actions no-print"><button id="saveTask">Tätigkeit speichern / starten</button><button id="clearEntry" class="secondary">Felder leeren</button><button id="micAll" class="outline">🎙 Alles diktieren</button></div>
@@ -168,8 +180,8 @@ function renderRows(){
      '<td>'+field('station',e.station)+'</td>'+
      '<td>'+field('room',e.room)+'</td>'+
      '<td>'+field('task',e.task,'text','task-edit')+'</td>'+
-     '<td class="no-print"><div class="actions" style="margin:0">'+(active?'<button class="endbtn" data-end="'+esc(e.id)+'">Tätigkeit beenden</button>':'')+'<button class="danger" data-delete="'+esc(e.id)+'">Löschen</button></div></td></tr>'+
-     '<tr class="mobile-actions no-print"><td colspan="6"><div class="actions">'+(active?'<button class="endbtn" data-end="'+esc(e.id)+'">Tätigkeit beenden</button>':'')+'<button class="danger" data-delete="'+esc(e.id)+'">Löschen</button></div></td></tr>';
+     '<td class="no-print"><div class="actions" style="margin:0">'+(active?'<button class="endbtn" data-end="'+esc(e.id)+'">Tätigkeit beenden</button>':'')+'<button class="danger" data-delete="'+esc(e.id)+'">× Löschen</button></div></td></tr>'+
+     '<tr class="mobile-actions no-print"><td colspan="6"><div class="actions">'+(active?'<button class="endbtn" data-end="'+esc(e.id)+'">Tätigkeit beenden</button>':'')+'<button class="danger" data-delete="'+esc(e.id)+'">× Löschen</button></div></td></tr>';
  }).join('');
  $('rows').querySelectorAll('[data-inline-id]').forEach(input=>{
    const commit=()=>{
@@ -270,7 +282,17 @@ let calendarMonth=new Date();
 function drawCalendar(){const year=calendarMonth.getFullYear(),month=calendarMonth.getMonth();$('calMonth').textContent=calendarMonth.toLocaleDateString('de-DE',{month:'long',year:'numeric'});const days=$('calDays');days.replaceChildren();for(const day of ['Mo','Di','Mi','Do','Fr','Sa','So']){const el=document.createElement('span');el.textContent=day;days.appendChild(el)}const offset=(new Date(year,month,1).getDay()+6)%7;for(let i=0;i<offset;i++)days.appendChild(document.createElement('span'));const n=new Date(year,month+1,0).getDate();for(let day=1;day<=n;day++){const button=document.createElement('button');button.type='button';button.textContent=day;button.className='calendar-day';button.addEventListener('click',()=>{const iso=year+'-'+String(month+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');$('datum').value=formatDateDE(iso);$('datum').dispatchEvent(new Event('change',{bubbles:true}));calendarOverlay.hidden=true});days.appendChild(button)}}
 $('datumPicker').addEventListener('click',()=>{const iso=parseDateISO($('datum').value);calendarMonth=iso?new Date(iso+'T12:00:00'):new Date();drawCalendar();calendarOverlay.hidden=false});$('calPrev').onclick=()=>{calendarMonth.setMonth(calendarMonth.getMonth()-1);drawCalendar()};$('calNext').onclick=()=>{calendarMonth.setMonth(calendarMonth.getMonth()+1);drawCalendar()};$('calClose').onclick=()=>calendarOverlay.hidden=true;calendarOverlay.addEventListener('click',e=>{if(e.target===calendarOverlay)calendarOverlay.hidden=true});
 $('datum').addEventListener('change',updateWeekday);$('clearEntry').onclick=clearEntry;$('export').onclick=exportPDF;$('backup').onclick=backupData;$('restore').onclick=()=>$('restoreFile').click();$('restoreFile').addEventListener('change',restoreData);$('micAll').onclick=()=>startRecognition('all',true);
-const mic=$('micTask');function startHold(e){e.preventDefault();if(listening){try{listening.stop()}catch(_){}listening=null}mic.classList.add('listening');mic.textContent='● Aufnahme läuft …';startRecognition('taetigkeit',true)}function stopHold(e){if(e)e.preventDefault();if(listening){try{listening.stop()}catch(_){}listening=null}mic.classList.remove('listening');mic.textContent='🎙 Halten zum Sprechen'}mic.addEventListener('pointerdown',startHold);['pointerup','pointerleave','pointercancel'].forEach(ev=>mic.addEventListener(ev,stopHold));window.addEventListener('beforeprint',()=>{});load();$('startzeit').value='';
+const mic=$('micTask');
+function resetMic(){mic.classList.remove('listening');mic.textContent='🎙 Spracheingabe'}
+mic.addEventListener('click',()=>{
+ if(listening){try{listening.stop()}catch(_){}listening=null;resetMic();return}
+ const rec=startRecognition('taetigkeit',false);
+ if(!rec){resetMic();return}
+ mic.classList.add('listening');mic.textContent='■ Aufnahme beenden';
+ const oldEnd=rec.onend;rec.onend=(e)=>{if(oldEnd)oldEnd(e);if(listening===rec)listening=null;resetMic()};
+ const oldError=rec.onerror;rec.onerror=(e)=>{if(oldError)oldError(e);if(listening===rec)listening=null;resetMic();if(e.error==='service-not-allowed'||e.error==='network'||e.error==='language-not-supported')notify('Die Web-Spracherkennung ist in dieser installierten App möglicherweise nicht verfügbar. Bitte das Mikrofon der iPhone-Tastatur verwenden.')};
+});
+window.addEventListener('beforeprint',()=>{});load();$('startzeit').value='';
 
 // Sicherung bleibt auf dem Gerät, bis die Nutzerin die Datei selbst teilt.
 function backupData(){const blob=new Blob([JSON.stringify({format:'hausdienst-backup-v1',data:state},null,2)],{type:'application/json'});const a=document.createElement('a');const url=URL.createObjectURL(blob);a.href=url;a.download='Hausdienst-Sicherung-'+today()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),60000)}
